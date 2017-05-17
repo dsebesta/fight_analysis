@@ -1,36 +1,22 @@
-var connection = require('./config');
-var Sequelize = require('sequelize');
+const express = require('express');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const app = express();
 
+app.use(cors());
 
-var Event = connection.credentials.define('events', {
-    title: {
-        type: Sequelize.STRING,
-        unique: true,
-        allowNull: false
-    },
-    venue: {
-        type: Sequelize.STRING
-    },
-    event_date: {
-        type: Sequelize.STRING
-    },
-    sherdog_url: {
-        type: Sequelize.STRING
-    }
+app.use(bodyParser());
 
+app.get('/', function (req, res) {
+    res.send('hello world');
 });
 
 
-connection.credentials.sync().then(function() {
-    Event.create({
-        title: 'UFC 211',
-        venue: 'Honda Center',
-        event_date: 'date of event'
-    }).catch(function(err) {
-        console.log(err.message)
-    });
-}).catch(function(err) {
-    console.log('error:', err)
+
+
+
+app.listen(3000, function() {
+    console.log('listening on port 3000');
 });
 
-console.log('started...');
+

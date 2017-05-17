@@ -13,13 +13,20 @@ const Nav = () => {
                 </Link>
             </ToolbarGroup>
             <ToolbarGroup>
-                <RaisedButton>
-                    <Link to='/events'>
+                <Link to='/events'>
+                    <RaisedButton>
                         Events
-                    </Link>
-                </RaisedButton>
+                    </RaisedButton>
+                </Link>
                 <Link to='/login'>
-                    Login
+                    <RaisedButton>
+                        Login
+                    </RaisedButton>
+                </Link>
+                <Link to='/admin'>
+                    <RaisedButton>
+                        Admin
+                    </RaisedButton>
                 </Link>
             </ToolbarGroup>
         </Toolbar>

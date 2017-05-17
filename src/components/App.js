@@ -13,6 +13,7 @@ import GetStarted from './GetStarted';
 import Find from './Find';
 import Nav from './Nav';
 import Login from './Login';
+import Admin from './Admin';
 
 
 class App extends Component {
@@ -25,13 +26,6 @@ class App extends Component {
             ]
         }
     }
-
-    componentWillMount() {
-        const {test} = this.state;
-        const rep = [...test];
-        console.log('rep', rep);
-    }
-
 
     render() {
         return (
@@ -46,6 +40,7 @@ class App extends Component {
                                 <Route path="/get_started" component={GetStarted} />
                                 <Route path="/find" component={Find} />
                                 <Route path="/login" component={Login} />
+                                <Route path="/admin" component={Admin} />
                                 <Route render={() => {
                                     return <p>Not Found</p>
                                     }}
