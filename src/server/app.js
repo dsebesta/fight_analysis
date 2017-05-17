@@ -12,7 +12,7 @@ var Event = connection.credentials.define('events', {
         type: Sequelize.STRING
     },
     event_date: {
-        type: Sequelize.DATE
+        type: Sequelize.STRING
     },
     sherdog_url: {
         type: Sequelize.STRING
@@ -24,7 +24,8 @@ var Event = connection.credentials.define('events', {
 connection.credentials.sync().then(function() {
     Event.create({
         title: 'UFC 211',
-        venue: 'Honda Center'
+        venue: 'Honda Center',
+        event_date: 'date of event'
     }).catch(function(err) {
         console.log(err.message)
     });
