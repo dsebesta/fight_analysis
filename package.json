@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open",
-    "server": "node ./src/server/app.js"
+    "server": "nodemon ./src/server/app.js"
   },
   "babel": {
     "presets": [
@@ -19,11 +19,13 @@
     "axios": "^0.16.1",
     "body-parser": "^1.17.1",
     "cors": "^2.8.3",
+    "epilogue": "^0.7.1",
     "express": "^4.15.2",
     "fight-matrix": "0.0.1",
     "material-ui": "^0.17.4",
     "mma": "^0.2.0",
     "mysql": "^2.13.0",
+    "nodemon": "^1.11.0",
     "prop-types": "^15.5.8",
     "query-string": "^4.3.4",
     "react": "^15.5.4",
