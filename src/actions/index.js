@@ -1,5 +1,27 @@
-import {LOGOUT_USER, AUTH_ERROR, AUTH_USER} from './types';
+import {LOGOUT_USER, AUTH_ERROR, AUTH_USER, SQL_IMPORT, FETCH_FIGHTERS} from './types';
+import axios from 'axios';
 
+const instance = axios.create({
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+});
+
+const BASE_URL = 'http://localhost:3000/api';
+
+export function fetchFighters() {
+    const request = instance.get(`${BASE_URL}/fighters`);
+    return {
+        type: FETCH_FIGHTERS,
+        payload: request
+    }
+}
+
+export function sqlImport() {
+    const request = instance.post(`${BASE_URL}/events`);
+    return {
+        type: SQL_IMPORT,
+        payload: request
+    }
+}
 
 export function signoutUser() {
     localStorage.removeItem('token');

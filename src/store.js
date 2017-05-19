@@ -12,7 +12,7 @@ const defaultState = {};
 
 const createStoreWithMiddleware = applyMiddleware(promise, reduxThunk)(createStore);
 
-const store = createStoreWithMiddleware(rootReducer, defaultState);
+const store = createStoreWithMiddleware(rootReducer, defaultState, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 // export const history = syncHistoryWithStore(browserHistory, store);
 
