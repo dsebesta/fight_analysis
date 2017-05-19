@@ -4,7 +4,8 @@ const express = require('express'),
     app = express(),
     http = require('http'),
     epilogue = require('epilogue'),
-    server = http.createServer(app);
+    server = http.createServer(app),
+    ufcSync = require('./ufc_events');
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -32,11 +33,19 @@ const fighterResource = epilogue.resource({
     endpoints: ['/api/fighter', '/api/fighter/:id']
 });
 
+const eventResource = epilogue.resource({
+    model: Event,
+    endpoints: ['/api/event', '/api/event/:id']
+});
+
 database
     .sync({force: true})
     .then(function() {
         server.listen(3000, function() {
             console.log('listening at port 3000');
+            ufcSync.getUpcomingEvents(function(upcomingEvents) {
+            
+            })
         })
     });
 

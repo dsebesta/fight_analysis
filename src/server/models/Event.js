@@ -16,6 +16,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         fighter_id: {
             type: DataTypes.INTEGER
+        },
+        event_id: {
+            type: DataTypes.INTEGER,
+            unique: true,
+            allowNull: false
         }
     });
     return Event;
