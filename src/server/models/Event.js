@@ -1,8 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
     const Event = sequelize.define('events', {
+        event_id: {
+            type: DataTypes.INTEGER,
+            unique: true,
+            allowNull: false,
+            primaryKey: true
+        },
         title: {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false
         },
         venue: {
@@ -13,14 +18,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         sherdog_url: {
             type: DataTypes.STRING
-        },
-        fighter_id: {
-            type: DataTypes.INTEGER
-        },
-        event_id: {
-            type: DataTypes.INTEGER,
-            unique: true,
-            allowNull: false
         }
     });
     return Event;

@@ -4,47 +4,41 @@ const express = require('express'),
     app = express(),
     http = require('http'),
     epilogue = require('epilogue'),
-    server = http.createServer(app),
-    middleware = require('./config/middleware');
+    server = http.createServer(app);
+
+const routes = require('./routes');
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use('/api', routes);
+
 // using require('./models') may create additional connections to the database
 // this can be avoided by attaching the module to the application
 app.set('models', require('./models'));
 
-
 const models = app.get('models');
 const database = models.sequelize;
-const Fighter = models.Fighter;
-const Event = models.Event;
 
-// Initialize epilogue
-epilogue.initialize({
-    app: app,
-    sequelize: database
-});
 
-// Create REST resource
-const fighterResource = epilogue.resource({
-    model: Fighter,
-    endpoints: ['/api/fighters', '/api/fighters/:id']
-});
-
-const eventResource = epilogue.resource({
-    model: Event,
-    endpoints: ['/api/events', '/api/events/:id']
-});
-
-eventResource.use(middleware);
-
-database
-    .sync()
-    .then(function() {
-        server.listen(3000, function() {
-            console.log('listening at port 3000');
+database.query('SET FOREIGN_KEY_CHECKS = 0').then(function() {
+    console.log('hi');
+    database.sync({force: true}).then(function() {
+        database.query('SET FOREIGN_KEY_CHECKS = 1').then(function() {
+            server.listen(3000, function () {
+                console.log('listening at port 3000');
+            })
         })
-    });
+    })
+});
+
+// database
+//     .sync({force: true})
+//     .then(() => {
+//         server.listen(3000, function () {
+//             console.log('listening at port 3000');
+//         })
+//     });
+
 
