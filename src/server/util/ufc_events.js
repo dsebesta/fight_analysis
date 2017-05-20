@@ -20,10 +20,48 @@ module.exports.getUpcomingEvents = function(callback) {
 
                 event.title = el.find("span[itemprop='name']").text();
                 event.venue = el.find("td[itemprop='location']").text().substring(1);
-                const month = el.find("span.month").text();
+                let month;
+                switch(el.find("span.month").text()) {
+                    case 'Jan':
+                        month = '01';
+                        break;
+                    case 'Feb':
+                        month = '02';
+                        break;
+                    case 'Mar':
+                        month = '03';
+                        break;
+                    case 'Apr':
+                        month = '04';
+                        break;
+                    case 'May':
+                        month = '05';
+                        break;
+                    case 'Jun':
+                        month = '06';
+                        break;
+                    case 'Jul':
+                        month = '07';
+                        break;
+                    case 'Aug':
+                        month = '08';
+                        break;
+                    case 'Sep':
+                        month = '09';
+                        break;
+                    case 'Oct':
+                        month = '10';
+                        break;
+                    case 'Nov':
+                        month = '11';
+                        break;
+                    case 'Dec':
+                        month = '12';
+                        break;
+                }
                 const day = el.find("span.day").text();
                 const year = el.find("span.year").text();
-                event.event_date = month + '/' + day + '/' + year;
+                event.event_date = year + '-' + month + '-' + day;
                 event.sherdog_url = 'http://www.sherdog.com/' + el.find("a[itemprop='url']").attr('href');
                 const lastHyphen = event.sherdog_url.lastIndexOf('-');
                 event.event_id = event.sherdog_url.substring(lastHyphen+1);

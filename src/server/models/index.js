@@ -17,9 +17,9 @@ models.forEach(function(model) {
 
 // describe relationships
 (function(m) {
-    m.Fighter.hasMany(m.Event);
+    m.Fighter.belongsToMany(m.Event, {through: 'EventsFighters', foreignKey: 'fighter_id'});
+    m.Event.belongsToMany(m.Fighter, {through: 'EventsFighters', foreignKey: 'event_id'});
 })(module.exports);
 
 // export connection
 module.exports.sequelize = sequelize;
-
