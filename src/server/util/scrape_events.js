@@ -1,7 +1,7 @@
 const request = require("request");
 const cheerio = require("cheerio");
 
-module.exports.getUpcomingEvents = function(callback) {
+module.exports.getUpcomingEvents = new Promise((resolve, reject) => {
     request('http://www.sherdog.com/organizations/Ultimate-Fighting-Championship-2', function (error, response, html) {
         if (!error && response.statusCode == 200) {
             const $ = cheerio.load(html);
@@ -68,10 +68,16 @@ module.exports.getUpcomingEvents = function(callback) {
                 upcomingEvents.push(event);
             });
 
-            callback(upcomingEvents);
+            resolve(upcomingEvents);
+
+        }
+        else {
+            reject('no bueno')
         }
     })
-};
+});
+
+
 
 
 
