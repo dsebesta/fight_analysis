@@ -23,7 +23,6 @@ const database = models.sequelize;
 
 
 database.query('SET FOREIGN_KEY_CHECKS = 0').then(function() {
-    console.log('hi');
     database.sync({force: true}).then(function() {
         database.query('SET FOREIGN_KEY_CHECKS = 1').then(function() {
             server.listen(3000, function () {

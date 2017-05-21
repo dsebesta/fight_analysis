@@ -19,6 +19,7 @@ models.forEach(function(model) {
 (function(m) {
     m.Fighter.belongsToMany(m.Event, {through: 'EventsFighters', foreignKey: 'fighter_id'});
     m.Event.belongsToMany(m.Fighter, {through: 'EventsFighters', foreignKey: 'event_id'});
+    // m.Venue.belongsToMany(m.Event, {through: 'EventsVenues'})
 })(module.exports);
 
 // export connection

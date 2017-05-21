@@ -7,7 +7,7 @@ module.exports.getEventData = (url) => {
             if (!error && response.statusCode == 200) {
                 const $ = cheerio.load(html);
                 const event_fighters = [];
-                
+
                 // Scrape Main Event Fighters
                 $('.left_side, .right_side').filter(function() {
                     const event_fighter = {
