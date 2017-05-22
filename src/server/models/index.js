@@ -18,10 +18,9 @@ models.forEach(function(model) {
 
 // describe relationships
 (function(m) {
-    // m.Event.hasMany(m.Fighter);
-    m.Fighter.belongsToMany(m.Event, {through: m.EventFighters, foreignKey: 'fighter_id', otherKey: 'event_id'});
-    console.log('m', m)
-    // m.Venue.belongsToMany(m.Event, {through: 'EventsVenues'})
+    m.EventFighters.belongsTo(m.Event);
+    m.EventFighters.belongsTo(m.Fighter);
+    m.Fighter.hasMany(m.EventFighters)
 })(module.exports);
 
 // export connection
