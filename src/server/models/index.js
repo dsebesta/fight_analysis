@@ -9,7 +9,8 @@ const sequelize = new Sequelize(config.db.name, config.db.user, config.db.passwo
 // load models
 const models = [
     'Event',
-    'Fighter'
+    'Fighter',
+    'EventFighters'
 ];
 models.forEach(function(model) {
     module.exports[model] = sequelize.import(__dirname + '/' + model);
@@ -17,8 +18,9 @@ models.forEach(function(model) {
 
 // describe relationships
 (function(m) {
-    m.Fighter.belongsToMany(m.Event, {through: 'EventsFighters', foreignKey: 'fighter_id'});
-    m.Event.belongsToMany(m.Fighter, {through: 'EventsFighters', foreignKey: 'event_id'});
+    // m.Event.hasMany(m.Fighter);
+    m.Fighter.belongsToMany(m.Event, {through: m.EventFighters, foreignKey: 'fighter_id', otherKey: 'event_id'});
+    console.log('m', m)
     // m.Venue.belongsToMany(m.Event, {through: 'EventsVenues'})
 })(module.exports);
 

@@ -6,14 +6,21 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             primaryKey: true
         },
-        name: {
+        fighter_name: {
             type: DataTypes.STRING,
             unique: true,
             allowNull: false
         },
-        height: {
+        fighter_url: {
+            type: DataTypes.STRING
+        },
+        event_id: {
+            type: DataTypes.INTEGER
+        },
+        event_match_id: {
             type: DataTypes.INTEGER
         }
     });
     return Fighter;
 };
+
