@@ -19,7 +19,7 @@ module.exports.getEventData = (url) => {
                     };
                     const el = $(this);
                     event_fighter.fighter_name = el.find("span[itemprop='name']").text();
-                    event_fighter.fighter_url = 'http://www.sherdog.com/' + el.find("a[itemprop='url']").attr('href');
+                    event_fighter.fighter_url = 'http://www.sherdog.com' + el.find("a[itemprop='url']").attr('href');
                     const lastHyphen1 = event_fighter.fighter_url.lastIndexOf('-');
                     event_fighter.fighter_id = event_fighter.fighter_url.substring(lastHyphen1+1);
                     event_fighter.event_match_id = 99;
