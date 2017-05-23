@@ -1,14 +1,9 @@
 import React, {Component} from 'react';
 import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
-import {fetchFighters} from './../actions';
+import {sqlImport} from './../actions';
 
 class Admin extends Component {
-
-    handleFetchFighters() {
-        console.log('fetch fighters clicked');
-        this.props.fetchFighters();
-    }
 
     handleSQLImport() {
         console.log('going to import some data!');
@@ -18,8 +13,7 @@ class Admin extends Component {
     render() {
         return (
                 <div>
-                    <RaisedButton label="Import Data" onTouchTap={this.props.handleSQLImport.bind(this)} />
-                    <RaisedButton label="Fetch Fighters" onTouchTap={this.handleFetchFighters.bind(this)} primary={true} />
+                    <RaisedButton label="Import Data" onTouchTap={this.handleSQLImport.bind(this)} />
                 </div>
         )
     }
@@ -31,4 +25,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, {fetchFighters})(Admin);
+export default connect(mapStateToProps, {sqlImport})(Admin);
