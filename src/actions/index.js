@@ -1,4 +1,4 @@
-import {LOGOUT_USER, AUTH_ERROR, AUTH_USER, SQL_IMPORT, FETCH_EVENTS_ALL} from './types';
+import {LOGOUT_USER, AUTH_ERROR, AUTH_USER, SQL_IMPORT, FETCH_EVENTS_ALL, FETCH_EVENT} from './types';
 import axios from 'axios';
 
 const instance = axios.create({
@@ -19,6 +19,14 @@ export function fetchEventsAll() {
     const request = instance.get(`${BASE_URL}/event`);
     return {
         type: FETCH_EVENTS_ALL,
+        payload: request
+    }
+}
+
+export function fetchEvent(id) {
+    const request = instance.get(`${BASE_URL}/event/` + id);
+    return {
+        type: FETCH_EVENT,
         payload: request
     }
 }

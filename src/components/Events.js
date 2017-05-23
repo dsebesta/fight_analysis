@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchEventsAll} from './../actions';
+import {Link} from 'react-router-dom';
 
 class Events extends Component {
 
@@ -10,11 +11,21 @@ class Events extends Component {
 
     renderEvents() {
         return this.props.eventData.map((event, index) => {
+            const route = '/events/ufc' + (event.event_id * 1.337);
+
             return (
                 <tr key={index}>
+
                     <td> {event.event_date} </td>
-                    <td> {event.title} </td>
+
+                    <td>
+                        <Link to={route}>
+                            {event.title}
+                        </Link>
+                    </td>
+
                     <td> {event.venue} </td>
+
                 </tr>
             )
         });

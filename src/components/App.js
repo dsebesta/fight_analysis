@@ -9,6 +9,7 @@ injectTapEventPlugin();
  //Components
 import Home from './Home';
 import Events from './Events';
+import Event from './Event';
 import GetStarted from './GetStarted';
 import Find from './Find';
 import Nav from './Nav';
@@ -36,7 +37,8 @@ class App extends Component {
                             <Nav />
                             <Switch >
                                 <Route exact path="/" component={Home} />
-                                <Route path="/events" component={Events} />
+                                <Route exact path="/events" component={Events} />
+                                <Route path="/events/:id" component={Event} />
                                 <Route path="/get_started" component={GetStarted} />
                                 <Route path="/find" component={Find} />
                                 <Route path="/login" component={Login} />
