@@ -1,4 +1,4 @@
-import {LOGOUT_USER, AUTH_ERROR, AUTH_USER, SQL_IMPORT, FETCH_FIGHTERS} from './types';
+import {LOGOUT_USER, AUTH_ERROR, AUTH_USER, SQL_IMPORT, FETCH_EVENTS_ALL} from './types';
 import axios from 'axios';
 
 const instance = axios.create({
@@ -7,18 +7,18 @@ const instance = axios.create({
 
 const BASE_URL = 'http://localhost:3000/api';
 
-export function fetchFighters() {
-    const request = instance.get(`${BASE_URL}/fighters`);
+export function sqlImport() {
+    const request = instance.post(`${BASE_URL}/admin/scrape_data`);
     return {
-        type: FETCH_FIGHTERS,
+        type: SQL_IMPORT,
         payload: request
     }
 }
 
-export function sqlImport() {
-    const request = instance.post(`${BASE_URL}/events`);
+export function fetchEventsAll() {
+    const request = instance.get(`${BASE_URL}/event`);
     return {
-        type: SQL_IMPORT,
+        type: FETCH_EVENTS_ALL,
         payload: request
     }
 }

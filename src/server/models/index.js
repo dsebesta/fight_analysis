@@ -20,7 +20,8 @@ models.forEach(function(model) {
 (function(m) {
     m.EventFighters.belongsTo(m.Event);
     m.EventFighters.belongsTo(m.Fighter);
-    m.Fighter.hasMany(m.EventFighters)
+    m.Fighter.hasMany(m.EventFighters);
+    m.Event.hasMany(m.EventFighters);
 })(module.exports);
 
 // export connection

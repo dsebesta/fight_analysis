@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         event_match_id: {
             type: DataTypes.INTEGER
+        },
+        event_match_position_id: {
+            type: DataTypes.INTEGER
         }
     });
     return Fighter;
