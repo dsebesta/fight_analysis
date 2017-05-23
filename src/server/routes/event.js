@@ -20,4 +20,28 @@ router.get('/', function(req, res) {
     });
 });
 
+router.get('/:id', (req, res) => {
+    const event_id = req.params.id / 1.337;
+    Event.findOne({
+        where: {
+            event_id: event_id
+        },
+        include: {
+            model: EventFighters,
+            include: {
+                model: Fighter
+            }
+        }
+    }).then((data) => {
+        res.status(200).json(data)
+    }).catch((err) => {
+        res.status(404).json({
+            Status: "Failed",
+            Error: err
+        })
+    })
+});
+
+//TODO find out why catch isnt working
+
 module.exports = router;
