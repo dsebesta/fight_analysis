@@ -21,7 +21,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', (req, res) => {
-    const event_id = req.params.id / 1.337;
+    const event_id = parseInt(req.params.id / 1.337);
     Event.findOne({
         where: {
             event_id: event_id
