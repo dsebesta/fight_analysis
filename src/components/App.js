@@ -4,6 +4,8 @@ import {Provider} from 'react-redux';
 import store, {history} from '../store';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+
+
 injectTapEventPlugin();
 
  //Components
@@ -32,7 +34,7 @@ class App extends Component {
         return (
             <MuiThemeProvider>
                 <Provider store={store} >
-                    <Router >
+                    <Router history={history}>
                         <div className='container'>
                             <Nav />
                             <Switch >

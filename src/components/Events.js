@@ -10,8 +10,9 @@ class Events extends Component {
     }
 
     renderEvents() {
-        return this.props.eventData.map((event, index) => {
-            const route = '/events/ufc' + (event.event_id * 1.337);
+        return this.props.events.map((event, index) => {
+            // const route = '/events/ufc' + (event.event_id * 1.337);
+            const route = '/events/ufc' + (event.event_id);
 
             return (
                 <tr key={index}>
@@ -33,7 +34,7 @@ class Events extends Component {
 
     render() {
 
-        if (!this.props.eventData) {
+        if (!this.props.events) {
             return (
                 <h3>Loading....</h3>
             )
@@ -62,7 +63,7 @@ class Events extends Component {
 
 function mapStateToProps(state) {
     return {
-        eventData: state.events
+        events: state.eventProps.events
     }
 }
 

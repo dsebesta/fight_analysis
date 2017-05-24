@@ -32,7 +32,7 @@ class Events extends Component {
 
 function mapStateToProps(state) {
     return {
-        event: state.events
+        event: state.eventProps.event
     }
 }
 
