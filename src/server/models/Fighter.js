@@ -8,7 +8,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         fighter_name: {
             type: DataTypes.STRING,
-            unique: true,
             allowNull: false
         },
         fighter_url: {

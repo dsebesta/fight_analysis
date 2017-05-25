@@ -12,10 +12,21 @@ class Events extends Component {
     }
 
     renderMatchups() {
-        const {fights} = this.props.event;
-        for (var key in fights) {
-            console.log(key + ' ' , fights[key])
-        }
+        const {event} = this.props;
+
+        return event.map((fight, index) => {
+
+            const fNames = fight.fighter_name.split(',');
+            const fIds = fight.fighter_id.split(',');
+
+            return (
+                <tr key={index}>
+                    <td> {fNames[0]} </td>
+                    <td> vs. </td>
+                    <td> {fNames[1]} </td>
+                </tr>
+            )
+        })
     }
 
 
@@ -30,9 +41,13 @@ class Events extends Component {
 
         return (
             <div className="home-container">
-                <h1>{this.props.event.title}</h1>
+                <h1>{this.props.event[0].title}</h1>
                 <div>
-                    {this.renderMatchups()}
+                    <table className="table table-striped">
+                        <tbody className="table-hover">
+                            {this.renderMatchups()}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         )
