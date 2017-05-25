@@ -1,8 +1,8 @@
-var scrape_event = require('./scrape_fighters_from_event');
+var scrape_fighter = require('./scrape_fighter_info');
 
 
-const url = 'http://www.sherdog.com/events/UFC-Fight-Night-109-Gustafsson-vs-Teixeira-58405';
-let pullData = scrape_event.getEventData(url);
+const url = 'http://www.sherdog.com/fighter/Alexander-Gustafsson-26162';
+let pullData = scrape_fighter.getFighterData(url);
 pullData.then((data) => {
     console.log(data)
 });
