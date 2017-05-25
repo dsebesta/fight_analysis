@@ -63,7 +63,7 @@ module.exports.getUpcomingEvents = () => {
                     const day = el.find("span.day").text();
                     const year = el.find("span.year").text();
                     event.event_date = year + '-' + month + '-' + day;
-                    event.sherdog_url = 'http://www.sherdog.com/' + el.find("a[itemprop='url']").attr('href');
+                    event.sherdog_url = 'http://www.sherdog.com' + el.find("a[itemprop='url']").attr('href');
                     const lastHyphen = event.sherdog_url.lastIndexOf('-');
                     event.event_id = event.sherdog_url.substring(lastHyphen+1);
                     upcomingEvents.push(event);

@@ -35,20 +35,25 @@ router.post('/scrape_data', (req, res) => {
                      // Creates a record for each fighter in the event
                      data.forEach((fighter) => {
                          if (fighter.fighter_name !== 'Unknown Fighter') {
+
+                             const event_id = fighter.event_id;
+                             const event_match_id = fighter.event_match_id;
+                             const event_match_position_id = fighter.event_match_position_id;
+                             const fighter_id = fighter.fighter_id;
+
                              Fighter
                                  .create({
                                      fighter_id: fighter.fighter_id,
                                      fighter_url: fighter.fighter_url,
-                                     fighter_name: fighter.fighter_name,
-                                     event_id: fighter.event_id,
-                                     event_match_id: fighter.event_match_id,
-                                     event_match_position_id: fighter.event_match_position_id
+                                     fighter_name: fighter.fighter_name
                                  })
                                  .then((result) => {
+
                                  EventFighters.create({
-                                     eventEventId: result.event_id,
-                                     fighterFighterId: result.fighter_id,
-                                     event_match_id: result.event_match_id
+                                     eventEventId: event_id,
+                                     fighterFighterId: fighter_id,
+                                     event_match_id: event_match_id,
+                                     event_match_position_id: event_match_position_id
                                  })
                              })
                          }

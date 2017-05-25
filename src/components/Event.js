@@ -11,6 +11,13 @@ class Events extends Component {
         this.props.fetchEvent(path.substring(pathIndex+3));
     }
 
+    renderMatchups() {
+        const {fights} = this.props.event;
+        for (var key in fights) {
+            console.log(key + ' ' , fights[key])
+        }
+    }
+
 
 
     render() {
@@ -24,6 +31,9 @@ class Events extends Component {
         return (
             <div className="home-container">
                 <h1>{this.props.event.title}</h1>
+                <div>
+                    {this.renderMatchups()}
+                </div>
             </div>
         )
     }

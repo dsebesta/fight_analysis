@@ -27,13 +27,33 @@ router.get('/:id', (req, res) => {
         where: {
             event_id: event_id
         },
+        attributes: ['title'],
         include: {
             model: EventFighters,
             include: {
-                model: Fighter
-            }
+                model: Fighter,
+                attributes: ['fighter_id', 'fighter_name']
+            },
+            attributes: [
+                'event_match_id',
+                'event_match_position_id'
+            ],
+            group: ['event_match_position_id'],
         }
-    }).then((data) => {
+    })
+    //     .then((data) => {
+    //     let eObject = {};
+    //     eObject.title = data.title;
+    //     eObject.fights = {};
+    //     data.event_fighters.map((match) => {
+    //         if (!eObject.fights[match.event_match_id]) {eObject.fights[match.event_match_id] = {}}
+    //         eObject.fights[match.event_match_id][match.event_match_position_id] = {};
+    //         eObject.fights[match.event_match_id][match.event_match_position_id].fighter_id = match.fighter.fighter_id;
+    //         eObject.fights[match.event_match_id][match.event_match_position_id].fighter_name = match.fighter.fighter_name;
+    //     });
+    //     return eObject;
+    // })
+        .then((data) => {
         res.status(200).json(data)
     }).catch((err) => {
         res.status(404).json({

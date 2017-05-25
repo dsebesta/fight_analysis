@@ -63,7 +63,7 @@ module.exports.getEventData = (url) => {
                     event_fighter.event_match_id = el.find('td:nth-child(1)').text().replace(/\s+/g, '');
                     const lf = el.find('.text_right');
                     event_fighter.fighter_name = lf.find("span[itemprop='name']").text();
-                    event_fighter.fighter_url = 'http://www.sherdog.com/' + lf.find("a[itemprop='url']").attr('href');
+                    event_fighter.fighter_url = 'http://www.sherdog.com' + lf.find("a[itemprop='url']").attr('href');
                     let lastHyphen1 = event_fighter.fighter_url.lastIndexOf('-');
                     event_fighter.fighter_id = event_fighter.fighter_url.substring(lastHyphen1+1);
                     let lastHyphen2 = url.lastIndexOf('-');
@@ -82,7 +82,7 @@ module.exports.getEventData = (url) => {
                     event_fighter.event_match_id = el.find('td:nth-child(1)').text().replace(/\s+/g, '');
                     const rf = el.find('.text_left');
                     event_fighter.fighter_name = rf.find("span[itemprop='name']").text();
-                    event_fighter.fighter_url = 'http://www.sherdog.com/' + rf.find("a[itemprop='url']").attr('href');
+                    event_fighter.fighter_url = 'http://www.sherdog.com' + rf.find("a[itemprop='url']").attr('href');
                     lastHyphen1 = event_fighter.fighter_url.lastIndexOf('-');
                     event_fighter.fighter_id = event_fighter.fighter_url.substring(lastHyphen1+1);
                     lastHyphen2 = url.lastIndexOf('-');
