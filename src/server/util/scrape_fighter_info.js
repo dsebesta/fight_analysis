@@ -42,15 +42,16 @@ module.exports.getFighterData = (url) => {
                     const lossesBySubmission = losses.find('.graph_tag:nth-child(5)');
                     const lossesByDecision = losses.find('.graph_tag:nth-child(7)');
                     const lossesByOther = losses.find('.graph_tag:nth-child(9)');
-                    const noContests = el.find('.right_side .bio_graph');
+                    const noContests = el.find('span:contains("N/C")').next();
+                    const draw = el.find('span:contains("Draws")').next();
                     const getTotal = function(el) { return parseInt(el.text().split(' ')[0] || 0); };
 
                     const wins_total = parseInt(wins.find('.card .counter').text());
                     const losses_total = parseInt(losses.find('.counter').text());
-                    const no_contests_total = noContests.find('.counter');
                     fighter_stats.wins = wins_total;
                     fighter_stats.losses = losses_total;
-                    fighter_stats.no_contest = getTotal(no_contests_total);
+                    fighter_stats.no_contest = getTotal(noContests);
+                    fighter_stats.draw = getTotal(draw);
                     fighter_stats.wins_ko = getTotal(winsByKnockout);
                     fighter_stats.wins_sub = getTotal(winsBySubmission);
                     fighter_stats.wins_dec = getTotal(winsByDecision);
@@ -71,9 +72,9 @@ module.exports.getFighterData = (url) => {
                     const height = el.find('.item.height strong').text();
                     const weight = el.find('.item.weight strong').text();
                     const weight_class = el.find('.item.wclass strong').text();
-                    const regex = /[0-9.]{5,}/g;
 
-                    fighter_stats.age = parseInt(age.slice(5));
+
+                    fighter_stats.age = age.slice(5) || 0;
                     fighter_stats.birthday = birthday;
                     fighter_stats.locality = locality;
                     fighter_stats.nationality = nationality;
