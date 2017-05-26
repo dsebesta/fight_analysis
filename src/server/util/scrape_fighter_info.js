@@ -7,20 +7,13 @@ module.exports.getFighterData = (url) => {
             if (!error && response.statusCode == 200) {
                 const $ = cheerio.load(html);
                 const fighter_stats = {
-                    wins: null,
-                    wins_kos: null,
-                    wins_sub: null,
-                    wins_dec: null,
-                    losses: null,
-                    losses_ko: null,
-                    losses_sub: null,
-                    losses_dec: null,
-                    no_contest: null,
                     height: null,
                     weight_class: null
                 };
-                console.log($('.bio_graph'));
-                fighter_stats.wins = $('.bio_graph').find('span[class="counter"]').text();
+                const tempHeight = $('.height').text();
+                const regex = /[0-9.]{6}/g;
+                fighter_stats.height = tempHeight.match(regex)[0];
+                fighter_stats.weight_class = $('.wclass').find('a').text();
 
                 resolve(fighter_stats);
             }
