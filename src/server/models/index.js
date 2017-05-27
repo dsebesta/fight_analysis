@@ -10,7 +10,8 @@ const sequelize = new Sequelize(config.db.name, config.db.user, config.db.passwo
 const models = [
     'Event',
     'Fighter',
-    'EventFighters'
+    'EventFighters',
+    'Record'
 ];
 models.forEach(function(model) {
     module.exports[model] = sequelize.import(__dirname + '/' + model);
@@ -21,6 +22,7 @@ models.forEach(function(model) {
     m.EventFighters.belongsTo(m.Event);
     m.EventFighters.belongsTo(m.Fighter);
     m.Fighter.hasMany(m.EventFighters);
+    m.Fighter.hasMany(m.Record);
     m.Event.hasMany(m.EventFighters);
 })(module.exports);
 

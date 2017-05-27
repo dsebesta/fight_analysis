@@ -12,8 +12,15 @@ class Admin extends Component {
 
     render() {
         return (
-                <div>
-                    <RaisedButton label="Import Data" onTouchTap={this.handleSQLImport.bind(this)} />
+                <div className="container">
+                    <div className="row justify-content-md-center">
+                        <h1>Let's Import Some Data</h1>
+                    </div>
+                    <div className="row justify-content-md-center">
+                        <RaisedButton label="Import Data" onTouchTap={this.handleSQLImport.bind(this)} />
+                    </div>
+
+
                 </div>
         )
     }

@@ -38,8 +38,7 @@ class App extends Component {
                         <div className='container'>
                             <Nav />
                             <Switch >
-                                <Route exact path="/" component={Home} />
-                                <Route exact path="/events" component={Events} />
+                                <Route exact path="/" component={Events} />
                                 <Route path="/events/:id" component={Event} />
                                 <Route path="/get_started" component={GetStarted} />
                                 <Route path="/find" component={Find} />

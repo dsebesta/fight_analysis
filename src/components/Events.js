@@ -42,7 +42,6 @@ class Events extends Component {
 
         return (
             <div className="home-container">
-                <h1>Events</h1>
                 <table className="table table-striped">
                     <thead>
                         <tr>
