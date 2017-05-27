@@ -6,7 +6,8 @@ module.exports.getFighterData = (url) => {
         request(url, function (error, response, html) {
             if (!error && response.statusCode == 200) {
                 const $ = cheerio.load(html);
-                const fighter_stats = {
+                const fighter_stats = {}
+                fighter_stats.info = {
                     wins: null,
                     wins_ko: null,
                     wins_sub: null,
@@ -26,8 +27,8 @@ module.exports.getFighterData = (url) => {
                     locality: null,
                     nationality: null,
                     association: null,
-
                 };
+                fighter_stats.fights = [];
 
 
                 $('.record .count_history').filter(function() {
@@ -48,18 +49,18 @@ module.exports.getFighterData = (url) => {
 
                     const wins_total = parseInt(wins.find('.card .counter').text());
                     const losses_total = parseInt(losses.find('.counter').text());
-                    fighter_stats.wins = wins_total;
-                    fighter_stats.losses = losses_total;
-                    fighter_stats.no_contest = getTotal(noContests);
-                    fighter_stats.draw = getTotal(draw);
-                    fighter_stats.wins_ko = getTotal(winsByKnockout);
-                    fighter_stats.wins_sub = getTotal(winsBySubmission);
-                    fighter_stats.wins_dec = getTotal(winsByDecision);
-                    fighter_stats.wins_other = getTotal(winsByOther);
-                    fighter_stats.losses_ko = getTotal(lossesByKnockout);
-                    fighter_stats.losses_sub = getTotal(lossesBySubmission);
-                    fighter_stats.losses_dec = getTotal(lossesByDecision);
-                    fighter_stats.losses_other = getTotal(lossesByOther);
+                    fighter_stats.info.wins = wins_total;
+                    fighter_stats.info.losses = losses_total;
+                    fighter_stats.info.no_contest = getTotal(noContests);
+                    fighter_stats.info.draw = getTotal(draw);
+                    fighter_stats.info.wins_ko = getTotal(winsByKnockout);
+                    fighter_stats.info.wins_sub = getTotal(winsBySubmission);
+                    fighter_stats.info.wins_dec = getTotal(winsByDecision);
+                    fighter_stats.info.wins_other = getTotal(winsByOther);
+                    fighter_stats.info.losses_ko = getTotal(lossesByKnockout);
+                    fighter_stats.info.losses_sub = getTotal(lossesBySubmission);
+                    fighter_stats.info.losses_dec = getTotal(lossesByDecision);
+                    fighter_stats.info.losses_other = getTotal(lossesByOther);
                 });
 
                 $('.bio').filter(function() {
@@ -73,15 +74,48 @@ module.exports.getFighterData = (url) => {
                     const weight = el.find('.item.weight strong').text();
                     const weight_class = el.find('.item.wclass strong').text();
 
+                    fighter_stats.info.age = age.slice(5) || 0;
+                    fighter_stats.info.birthday = birthday;
+                    fighter_stats.info.locality = locality;
+                    fighter_stats.info.nationality = nationality;
+                    fighter_stats.info.association = association;
+                    fighter_stats.info.height = height;
+                    fighter_stats.info.weight = weight;
+                    fighter_stats.info.weight_class = weight_class;
+                });
 
-                    fighter_stats.age = age.slice(5) || 0;
-                    fighter_stats.birthday = birthday;
-                    fighter_stats.locality = locality;
-                    fighter_stats.nationality = nationality;
-                    fighter_stats.association = association;
-                    fighter_stats.height = height;
-                    fighter_stats.weight = weight;
-                    fighter_stats.weight_class = weight_class;
+                // Fighter Fight History
+                $('.module.fight_history tr:not(.table_head)').each(function() {
+                    const el = $(this);
+                    const result = el.find('td:nth-child(1) .final_result').text();
+                    const opponent_name = el.find('td:nth-child(2) a').text();
+                    const opponent_url = el.find('td:nth-child(2) a').attr('href');
+                    const event_name = el.find('td:nth-child(3) a').text();
+                    const event_url = el.find('td:nth-child(3) a').attr('href');
+                    const event_date = el.find('td:nth-child(3) .sub_line').text();
+                    const method = el.find('td:nth-child(4)').text().split(/\)(.*)/)[0] + ")";
+                    const referee = el.find('td:nth-child(4) .sub_line').text();
+                    const round = el.find('td:nth-child(5)').text();
+                    const time = el.find('td:nth-child(6)').text();
+                    //----------------------------------+
+                    //  JSON object for Fight
+                    //----------------------------------+
+                    const fight = {
+                        name: event_name,
+                        date: event_date,
+                        url: event_url,
+                        result: result,
+                        method: method,
+                        referee: referee,
+                        round: round,
+                        time: time,
+                        opponent: opponent_name,
+                        opponent_url: opponent_url
+                    };
+
+                    if (result !== "") {
+                        fighter_stats.fights.push(fight);
+                    }
                 });
 
 
