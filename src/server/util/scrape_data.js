@@ -85,6 +85,8 @@ module.exports.getFightersFromEvent = (url) => {
                 const $ = cheerio.load(html);
                 const event_fighters = [];
 
+                let compiledFighterIds = [];
+
                 // Scrape Main Event Fighters
                 $('.left_side').filter(function() {
                     const event_fighter = {
@@ -102,7 +104,12 @@ module.exports.getFightersFromEvent = (url) => {
                     event_fighter.fighter_id = event_fighter.fighter_url.substring(lastHyphen1+1);
                     const lastHyphen2 = url.lastIndexOf('-');
                     event_fighter.event_id = url.substring(lastHyphen2+1);
-                    event_fighters.push(event_fighter);
+
+                    // used to remove duplicate fighters from an event. yes, this happens on sherdog
+                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1) {
+                        compiledFighterIds.push(event_fighter.fighter_id);
+                        event_fighters.push(event_fighter);
+                    }
                 });
 
                 $('.right_side').filter(function() {
@@ -121,7 +128,12 @@ module.exports.getFightersFromEvent = (url) => {
                     event_fighter.fighter_id = event_fighter.fighter_url.substring(lastHyphen1+1);
                     const lastHyphen2 = url.lastIndexOf('-');
                     event_fighter.event_id = url.substring(lastHyphen2+1);
-                    event_fighters.push(event_fighter);
+
+                    // used to remove duplicate fighters from an event. yes, this happens on sherdog
+                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1) {
+                        compiledFighterIds.push(event_fighter.fighter_id);
+                        event_fighters.push(event_fighter);
+                    }
                 });
 
                 //Scrape All Other Fighters
@@ -145,7 +157,12 @@ module.exports.getFightersFromEvent = (url) => {
                     event_fighter.fighter_id = event_fighter.fighter_url.substring(lastHyphen1+1);
                     let lastHyphen2 = url.lastIndexOf('-');
                     event_fighter.event_id = url.substring(lastHyphen2+1);
-                    event_fighters.push(event_fighter);
+
+                    // used to remove duplicate fighters from an event. yes, this happens on sherdog
+                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1) {
+                        compiledFighterIds.push(event_fighter.fighter_id);
+                        event_fighters.push(event_fighter);
+                    }
 
                     // Fighter on right
                     event_fighter = {
@@ -164,7 +181,13 @@ module.exports.getFightersFromEvent = (url) => {
                     event_fighter.fighter_id = event_fighter.fighter_url.substring(lastHyphen1+1);
                     lastHyphen2 = url.lastIndexOf('-');
                     event_fighter.event_id = url.substring(lastHyphen2+1);
-                    event_fighters.push(event_fighter);
+
+                    // used to remove duplicate fighters from an event. yes, this happens on sherdog
+                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1) {
+                        compiledFighterIds.push(event_fighter.fighter_id);
+                        event_fighters.push(event_fighter);
+                    }
+
                 });
 
                 resolve(event_fighters)
