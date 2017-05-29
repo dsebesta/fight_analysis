@@ -106,7 +106,7 @@ module.exports.getFightersFromEvent = (url) => {
                     event_fighter.event_id = url.substring(lastHyphen2+1);
 
                     // used to remove duplicate fighters from an event. yes, this happens on sherdog
-                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1) {
+                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1 && event_fighter.fighter_name !== 'Unknown Fighter') {
                         compiledFighterIds.push(event_fighter.fighter_id);
                         event_fighters.push(event_fighter);
                     }
@@ -130,7 +130,7 @@ module.exports.getFightersFromEvent = (url) => {
                     event_fighter.event_id = url.substring(lastHyphen2+1);
 
                     // used to remove duplicate fighters from an event. yes, this happens on sherdog
-                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1) {
+                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1 && event_fighter.fighter_name !== 'Unknown Fighter') {
                         compiledFighterIds.push(event_fighter.fighter_id);
                         event_fighters.push(event_fighter);
                     }
@@ -159,7 +159,7 @@ module.exports.getFightersFromEvent = (url) => {
                     event_fighter.event_id = url.substring(lastHyphen2+1);
 
                     // used to remove duplicate fighters from an event. yes, this happens on sherdog
-                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1) {
+                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1 && event_fighter.fighter_name !== 'Unknown Fighter') {
                         compiledFighterIds.push(event_fighter.fighter_id);
                         event_fighters.push(event_fighter);
                     }
@@ -183,7 +183,7 @@ module.exports.getFightersFromEvent = (url) => {
                     event_fighter.event_id = url.substring(lastHyphen2+1);
 
                     // used to remove duplicate fighters from an event. yes, this happens on sherdog
-                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1) {
+                    if (compiledFighterIds.indexOf(event_fighter.fighter_id) === -1 && event_fighter.fighter_name !== 'Unknown Fighter') {
                         compiledFighterIds.push(event_fighter.fighter_id);
                         event_fighters.push(event_fighter);
                     }
