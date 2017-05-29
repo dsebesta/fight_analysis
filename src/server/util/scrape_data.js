@@ -198,12 +198,13 @@ module.exports.getFightersFromEvent = (url) => {
         })
     });
 };
-module.exports.getFighterData = (url) => {
+module.exports.getFighterData = (url, id) => {
     return new Promise((resolve, reject) => {
         request(url, function (error, response, html) {
             if (!error && response.statusCode == 200) {
                 const $ = cheerio.load(html);
-                const fighter_stats = {}
+                const fighter_stats = {};
+                fighter_stats.id = parseInt(id);
                 fighter_stats.info = {
                     wins: null,
                     wins_ko: null,
@@ -290,6 +291,50 @@ module.exports.getFighterData = (url) => {
                     const event_name = el.find('td:nth-child(3) a').text();
                     const event_url = el.find('td:nth-child(3) a').attr('href');
                     const event_date = el.find('td:nth-child(3) .sub_line').text();
+                    const dateArray = event_date.split(' / ');
+                    let month = '';
+                    switch(dateArray[0]) {
+                        case 'Jan':
+                            month = '01';
+                            break;
+                        case 'Feb':
+                            month = '02';
+                            break;
+                        case 'Mar':
+                            month = '03';
+                            break;
+                        case 'Apr':
+                            month = '04';
+                            break;
+                        case 'May':
+                            month = '05';
+                            break;
+                        case 'Jun':
+                            month = '06';
+                            break;
+                        case 'Jul':
+                            month = '07';
+                            break;
+                        case 'Aug':
+                            month = '08';
+                            break;
+                        case 'Sep':
+                            month = '09';
+                            break;
+                        case 'Oct':
+                            month = '10';
+                            break;
+                        case 'Nov':
+                            month = '11';
+                            break;
+                        case 'Dec':
+                            month = '12';
+                            break;
+                    }
+                    const year = dateArray[2];
+                    const day = dateArray[1];
+
+                    const formatted_date = year + '-' + month + '-' + day;
                     const method = el.find('td:nth-child(4)').text().split(/\)(.*)/)[0] + ")";
                     const referee = el.find('td:nth-child(4) .sub_line').text();
                     const round = el.find('td:nth-child(5)').text();
@@ -298,8 +343,9 @@ module.exports.getFighterData = (url) => {
                     //  JSON object for Fight
                     //----------------------------------+
                     const fight = {
+                        fighterFighterId: id,
                         name: event_name,
-                        date: event_date,
+                        date: formatted_date,
                         url: event_url,
                         result: result,
                         method: method,
