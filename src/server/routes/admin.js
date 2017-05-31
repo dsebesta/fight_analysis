@@ -4,6 +4,7 @@ const router = express.Router();
 const Event = model.Event;
 const Fighter = model.Fighter;
 const EventFighters = model.EventFighters;
+const Record = model.Record;
 const ufcSync = require('../util/scrape_data');
 
 router.get('/', function(req, res) {
@@ -11,23 +12,24 @@ router.get('/', function(req, res) {
 });
 
 router.post('/scrape_data', (request, response) => {
+
+    // const test = [{
+    //     title: 'test event',
+    //     venue: 'test venue',
+    //     event_date: '2019-01-01',
+    //     sherdog_url: 'http://www.sherdog.com/events/UFC-214-Cormier-vs-Jones-2-57825',
+    //     event_id: 57825
+    // }];
+
     const resultsObj = {};
+    const fightsArray = [];
     // Scrape event data from sherdog
     ufcSync.getUpcomingEvents()
         .then((events) => {
-            const test = [
-                {
-                    title: 'Yo what up',
-                    venue: 'My house',
-                    event_date: '2017-05-02',
-                    sherdog_url: 'http://www.sherdog.com/events/UFC-Fight-Night-109-Gustafsson-vs-Teixeira-58405',
-                    event_id: 58405
-                }
-            ];
             return Promise.all(
                 // Go through each event, see if it exists. Update the mySQL database if it does, create if it doesn't.
                 // Create a promise for each event so script does not moved forward until all are complete.
-                 test.map(event => {
+                 events.map(event => {
                      return new Promise((res, rej) => {
                          Event.findOne(event, {
                              where: {
@@ -45,8 +47,8 @@ router.post('/scrape_data', (request, response) => {
                                  }
                              })
                              .catch(err => {
-                                 console.log('wtf happened', err);
-                                 rej('somethin bad happened')
+                                 console.log('upcoming events error: ', err);
+                                 rej()
                              })
                      });
                  })
@@ -158,16 +160,19 @@ router.post('/scrape_data', (request, response) => {
             )
         })
         .then((createdAssociations) => {
+
             resultsObj.createdAssocations = createdAssociations;
+
             // Scrape detailed fighter info
             return Promise.all(
                 resultsObj.createdFighters.map(fighter => {
                     return new Promise((res, rej) => {
-                        ufcSync.getFighterData(fighter.fighter_url)
+                        ufcSync.getFighterData(fighter.fighter_url, fighter.fighter_id)
                             .then(detailedFighterInfo => {
-                                console.log('retrieved fighter info for: ' + fighter.fighter_name);
+                                console.log('retrieved detailed info for: ' + fighter.fighter_name);
                                 res(detailedFighterInfo)
-                            }).catch(err => {
+                            })
+                            .catch(err => {
                                 console.log('error detailed fighter info', err);
                                 rej(err)
                         })
@@ -176,10 +181,67 @@ router.post('/scrape_data', (request, response) => {
             )
         })
         .then((fightersDetailed) => {
-            console.log('hi there');
             resultsObj.fightersDetailed = fightersDetailed;
             // Import detailed fighter info into mySQL database
-            response.status(200).json({Results: resultsObj})
+            return Promise.all(
+                fightersDetailed.map(fighter => {
+                    Array.prototype.push.apply(fightsArray, fighter.fights); // Merge all fight records into one array to make importing them easier later
+                    return new Promise((res, rej) => {
+                        Fighter.findOne({
+                            where: {
+                                fighter_id: fighter.id
+                            }
+                        }).then((foundFighter) => {
+                            foundFighter.update(fighter.info)
+                                .then(() => {
+                                    console.log('imported stats for fighter_id: ' + fighter.id);
+                                    res(fighter.id)
+                                })
+                                .catch(err => {
+                                    console.log('fighter stats failed to import', err);
+                                    rej(fighter.id)
+                                    }
+                                )
+                        })
+                    })
+                })
+            )
+        })
+        .then((fighterStatsImport) => {
+            resultsObj.fighterStatsImport = fighterStatsImport;
+            // Update records table with past fights
+            return Promise.all(
+                fightsArray.map(fight => {
+                    return new Promise((res, rej) => {
+                            Record.findOne({
+                                where: {
+                                    fighterFighterId: fight.fighterFighterId,
+                                    name: fight.name
+                                }
+                            })
+                            .then((foundFight) => {
+                                if (foundFight) {
+                                    console.log('updating fight record', fight.fighterFighterId);
+                                    res(foundFight.update(fight))
+                                }
+                                else {
+                                    console.log('creating new fight record: ', fight.fighterFighterId);
+                                    res(Record.create(fight))
+                                }
+                            })
+                            .catch(() => {
+                                    console.log('failed to import fight');
+                                    rej();
+                            })
+                    })
+                })
+            )
+
+        })
+        .then((fightRecordsImported) => {
+            resultsObj.fightRecordsImported = fightRecordsImported;
+            response.status(200).json({Results: resultsObj});
+            console.log('** sync completed **')
         })
 });
 

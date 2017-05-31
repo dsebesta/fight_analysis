@@ -9,7 +9,6 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
  //Components
-import Home from './Home';
 import Events from './Events';
 import Event from './Event';
 import GetStarted from './GetStarted';
@@ -17,17 +16,12 @@ import Find from './Find';
 import Nav from './Nav';
 import Login from './Login';
 import Admin from './Admin';
-
+import Matchup from './Matchup';
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {
-            test: [
-                1, 2, 3
-            ]
-        }
     }
 
     render() {
@@ -39,7 +33,8 @@ class App extends Component {
                             <Nav />
                             <Switch >
                                 <Route exact path="/" component={Events} />
-                                <Route path="/events/:id" component={Event} />
+                                <Route exact path="/events/:id" component={Event} />
+                                <Route exact path="/events/:id/:match" component={Matchup} />
                                 <Route path="/get_started" component={GetStarted} />
                                 <Route path="/find" component={Find} />
                                 <Route path="/login" component={Login} />

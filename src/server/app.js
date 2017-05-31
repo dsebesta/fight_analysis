@@ -23,7 +23,7 @@ const database = models.sequelize;
 
 
 database.query('SET FOREIGN_KEY_CHECKS = 0').then(function() {
-    database.sync({force: true}).then(function() {
+    database.sync({force: false}).then(function() {
         database.query('SET FOREIGN_KEY_CHECKS = 1').then(function() {
             server.listen(3000, function () {
                 console.log('listening at port 3000');

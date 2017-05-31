@@ -9,27 +9,27 @@ class Events extends Component {
         const path = document.location.href;
         const pathIndex = path.indexOf('ufc');
         this.props.fetchEvent(path.substring(pathIndex+3));
+        console.log('fetching event')
     }
 
     renderMatchups() {
         const {event} = this.props;
 
+
         return event.map((fight, index) => {
 
             const fNames = fight.fighter_name.split(',');
-            const fIds = fight.fighter_id.split(',');
+            const route = '/events/ufc' + fight.event_id + '/' + fight.match_id;
 
             return (
                 <tr key={index}>
-                    <td> {fNames[0]} </td>
+                    <td> <Link to={route}>{fNames[0]} </Link></td>
                     <td> vs. </td>
-                    <td> {fNames[1]} </td>
+                    <td> <Link to={route}>{fNames[1]} </Link></td>
                 </tr>
             )
         })
     }
-
-
 
     render() {
 
@@ -42,6 +42,7 @@ class Events extends Component {
         return (
             <div className="home-container">
                 <h1>{this.props.event[0].title}</h1>
+                <Link to="/events/testid/testmatchup">TEST LINK</Link>
                 <div>
                     <table className="table table-striped">
                         <tbody className="table-hover">
@@ -52,7 +53,6 @@ class Events extends Component {
             </div>
         )
     }
-
 }
 
 function mapStateToProps(state) {
