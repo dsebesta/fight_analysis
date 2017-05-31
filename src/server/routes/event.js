@@ -4,6 +4,7 @@ const router = express.Router();
 const Event = model.Event;
 const Fighter = model.Fighter;
 const EventFighters = model.EventFighters;
+const Record = model.Record;
 
 
 router.get('/', function(req, res) {
@@ -21,7 +22,6 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', (req, res) => {
-    // const event_id = parseInt(req.params.id / 1.337);
     const event_id = parseInt(req.params.id);
 
     model.sequelize.query(
@@ -37,41 +37,6 @@ router.get('/:id', (req, res) => {
         "WHERE `events`.`event_id` = " + event_id + " " +
         "GROUP BY `match_id` DESC"
     )
-
-
-
-
-
-    // Event.findOne({
-    //     where: {
-    //         event_id: event_id
-    //     },
-    //     attributes: ['title'],
-    //     include: {
-    //         model: EventFighters,
-    //         include: {
-    //             model: Fighter,
-    //             attributes: ['fighter_id', 'fighter_name']
-    //         },
-    //         attributes: [
-    //             'event_match_id',
-    //             'event_match_position_id'
-    //         ],
-    //         group: ['event_match_position_id'],
-    //     }
-    // })
-    //     .then((data) => {
-    //     let eObject = {};
-    //     eObject.title = data.title;
-    //     eObject.fights = {};
-    //     data.event_fighters.map((match) => {
-    //         if (!eObject.fights[match.event_match_id]) {eObject.fights[match.event_match_id] = {}}
-    //         eObject.fights[match.event_match_id][match.event_match_position_id] = {};
-    //         eObject.fights[match.event_match_id][match.event_match_position_id].fighter_id = match.fighter.fighter_id;
-    //         eObject.fights[match.event_match_id][match.event_match_position_id].fighter_name = match.fighter.fighter_name;
-    //     });
-    //     return eObject;
-    // })
         .spread((data) => {
         res.status(200).json(data)
     }).catch((err) => {
@@ -79,6 +44,30 @@ router.get('/:id', (req, res) => {
             Status: "Failed",
             Error: err
         })
+    })
+});
+router.get('/:id/:matchup', (req, res) => {
+    const event_id = parseInt(req.params.id);
+    const matchup_id = parseInt(req.params.matchup);
+
+    Event.findOne({
+        include: {
+            model: EventFighters,
+            where: {
+                event_match_id: matchup_id
+            },
+            include: {
+                model: Fighter,
+                include: {
+                    model: Record
+                }
+            }
+        },
+        where: {
+            event_id: event_id
+        }
+    }).then((results) => {
+        res.status(200).json(results)
     })
 });
 

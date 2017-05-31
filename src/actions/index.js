@@ -24,7 +24,15 @@ export function fetchEventsAll() {
 }
 
 export function fetchEvent(id) {
-    const request = instance.get(`${BASE_URL}/event/` + id);
+    const request = instance.get(`${BASE_URL}/event/${id}`);
+    return {
+        type: FETCH_EVENT,
+        payload: request
+    }
+}
+
+export function fetchMatchup(id, matchup) {
+    const request = instance.get(`${BASE_URL}/event/${id}/${matchup}`);
     return {
         type: FETCH_EVENT,
         payload: request

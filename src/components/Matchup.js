@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import {fetchMatchup} from './../actions';
 
 class Matchup extends Component {
 
     componentWillMount() {
-
+        const path = document.location.href;
+        const pathIndexUFC = path.indexOf('ufc');
+        const pathIndexSlash = path.lastIndexOf('/');
+        const event_id = path.substring(pathIndexUFC+3, pathIndexSlash);
+        const matchup_id = path.substring(pathIndexSlash+1);
+        this.props.fetchMatchup(event_id, matchup_id);
     }
+
 
     render() {
         return (
@@ -24,4 +31,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps) (Matchup);
+export default connect(mapStateToProps, {fetchMatchup}) (Matchup);

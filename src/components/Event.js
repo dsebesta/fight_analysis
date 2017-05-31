@@ -9,7 +9,6 @@ class Events extends Component {
         const path = document.location.href;
         const pathIndex = path.indexOf('ufc');
         this.props.fetchEvent(path.substring(pathIndex+3));
-        console.log('fetching event')
     }
 
     renderMatchups() {
@@ -42,7 +41,6 @@ class Events extends Component {
         return (
             <div className="home-container">
                 <h1>{this.props.event[0].title}</h1>
-                <Link to="/events/testid/testmatchup">TEST LINK</Link>
                 <div>
                     <table className="table table-striped">
                         <tbody className="table-hover">
