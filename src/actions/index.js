@@ -1,4 +1,4 @@
-import {LOGOUT_USER, AUTH_ERROR, AUTH_USER, SQL_IMPORT, FETCH_EVENTS_ALL, FETCH_EVENT} from './types';
+import {LOGOUT_USER, AUTH_ERROR, AUTH_USER, SQL_IMPORT, FETCH_EVENTS_ALL, FETCH_EVENT, FETCH_MATCHUP} from './types';
 import axios from 'axios';
 
 const instance = axios.create({
@@ -32,9 +32,9 @@ export function fetchEvent(id) {
 }
 
 export function fetchMatchup(id, matchup) {
-    const request = instance.get(`${BASE_URL}/event/${id}/${matchup}`);
+    const request = instance.get(`${BASE_URL}/fighter/${id}/${matchup}`);
     return {
-        type: FETCH_EVENT,
+        type: FETCH_MATCHUP,
         payload: request
     }
 }

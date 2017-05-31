@@ -4,7 +4,6 @@ const router = express.Router();
 const Event = model.Event;
 const Fighter = model.Fighter;
 const EventFighters = model.EventFighters;
-const Record = model.Record;
 
 
 router.get('/', function(req, res) {
@@ -46,30 +45,7 @@ router.get('/:id', (req, res) => {
         })
     })
 });
-router.get('/:id/:matchup', (req, res) => {
-    const event_id = parseInt(req.params.id);
-    const matchup_id = parseInt(req.params.matchup);
 
-    Event.findOne({
-        include: {
-            model: EventFighters,
-            where: {
-                event_match_id: matchup_id
-            },
-            include: {
-                model: Fighter,
-                include: {
-                    model: Record
-                }
-            }
-        },
-        where: {
-            event_id: event_id
-        }
-    }).then((results) => {
-        res.status(200).json(results)
-    })
-});
 
 //TODO find out why catch isnt working
 

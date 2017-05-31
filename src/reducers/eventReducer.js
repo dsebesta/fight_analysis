@@ -10,10 +10,6 @@ function eventData(state = [], action) {
             let newState1 = JSON.parse(JSON.stringify(state));
             newState1.event = action.payload.data;
             return newState1;
-        case FETCH_MATCHUP:
-            let newState2 = JSON.parse(JSON.stringify(state));
-            newState2 = action.payload.data;
-            return newState2;
     }
     return state;
 }

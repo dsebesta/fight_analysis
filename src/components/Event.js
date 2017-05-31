@@ -38,6 +38,8 @@ class Events extends Component {
             )
         }
 
+        console.log(this.props.event);
+
         return (
             <div className="home-container">
                 <h1>{this.props.event[0].title}</h1>

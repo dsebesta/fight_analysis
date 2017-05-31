@@ -4,22 +4,32 @@ const router = express.Router();
 const Event = model.Event;
 const Fighter = model.Fighter;
 const EventFighters = model.EventFighters;
+const Record = model.Record;
 
 
-router.get('/fighter', function(req, res) {
-    Fighter.findAll({
+router.get('/:id/:matchup', (req, res) => {
+    const event_id = parseInt(req.params.id);
+    const matchup_id = parseInt(req.params.matchup);
+
+    Event.findOne({
         include: {
             model: EventFighters,
+            where: {
+                event_match_id: matchup_id
+            },
             include: {
-                model: Event,
-                where: {
-                    event_id: '58241'
+                model: Fighter,
+                include: {
+                    model: Record
                 }
             }
+        },
+        where: {
+            event_id: event_id
         }
-    }).then(fighter => {
-        res.status(200).json(fighter)
-    });
+    }).then((results) => {
+        res.status(200).json(results)
+    })
 });
 
 module.exports = router;
