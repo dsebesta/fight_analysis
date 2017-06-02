@@ -11,8 +11,13 @@ import {
     TableRow,
     TableRowColumn,
 } from 'material-ui/Table';
+import GeneralStats from './GeneralStats';
 
 class Matchup extends Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     componentWillMount() {
         const path = document.location.href;
@@ -32,37 +37,7 @@ class Matchup extends Component {
         }
     }
 
-    renderLevel1Stats(fighter) {
-        return (
-            <table className="table table-borderless">
-                <tbody>
-                <tr><td>{fighter.age}</td></tr>
-                <tr><td>{fighter.height}</td></tr>
-                <tr><td>{fighter.wins}</td></tr>
-                <tr><td>{fighter.losses}</td></tr>
-                <tr><td>{fighter.draw}</td></tr>
-                <tr><td>{fighter.no_contest}</td></tr>
-                <tr><td>Coming Soon</td></tr>
-                <tr><td>Coming Soon</td></tr>
-                <tr><td>Coming Soon</td></tr>
-                </tbody>
-            </table>
-        )
-    }
 
-
-    renderLevel2Stats(fighter) {
-        return (
-            <table className="table table-borderless">
-                <tbody>
-                <tr><td>Coming Soon</td></tr>
-                <tr><td>Coming Soon</td></tr>
-                <tr><td>Coming Soon</td></tr>
-                <tr><td>Coming Soon</td></tr>
-                </tbody>
-            </table>
-        )
-    }
 
     render() {
 
@@ -77,75 +52,16 @@ class Matchup extends Component {
 
         return (
             <div className="matchup-container">
-
-                <div className="matchup-header">
-                    <div className="matchup-header-name">
-
-                    </div>
-                    <div className="matchup-header-name">
-                        <h4>{fighter_0.fighter_name}</h4>
-                    </div>
-                    <div className="matchup-header-name">
-                        <h4>{fighter_1.fighter_name}</h4>
-                    </div>
+                <div className="matchup-left-col">
+                    General
+                </div>
+                <div className="matchup-right-col">
+                    <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
                 </div>
 
-                <div>
-                    <div className="matchup-left-column">
-                        <table className="table table-borderless">
-                            <tbody>
-                            <tr><td className="text-right">Age</td></tr>
-                            <tr><td className="text-right">Height</td></tr>
-                            <tr><td className="text-right">Wins</td></tr>
-                            <tr><td className="text-right">Losses</td></tr>
-                            <tr><td className="text-right">Draws</td></tr>
-                            <tr><td className="text-right">No Contest</td></tr>
-                            <tr><td className="text-right">Current Streak</td></tr>
-                            <tr><td className="text-right">Typically Wins By</td></tr>
-                            <tr><td className="text-right">Typically Loses By</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="matchup-right-column">
-                        <Paper zDepth={2}>
-                            <div className="innerPaperContainer">
-                                {this.renderLevel1Stats(fighter_0)}
-                            </div>
-
-                            <div className="innerPaperContainer">
-                                {this.renderLevel1Stats(fighter_1)}
-                            </div>
-                        </Paper>
-                    </div>
-                </div>
-
-                <div className="stat-container">
-                    <div className="matchup-left-column">
-                        <table className="table table-borderless">
-                            <tbody>
-                            <tr><td className="text-right">Days Since Last Fight</td></tr>
-                            <tr><td className="text-right">MMA Career Length</td></tr>
-                            <tr><td className="text-right">KO Losses</td></tr>
-                            <tr><td className="text-right">Submission Losses</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div className="matchup-right-column">
-                        <Paper zDepth={2}>
-                            <div className="innerPaperContainer">
-                                {this.renderLevel2Stats(fighter_0)}
-                            </div>
-
-                            <div className="innerPaperContainer">
-                                {this.renderLevel2Stats(fighter_1)}
-                            </div>
-                        </Paper>
-                    </div>
-                </div>
             </div>
         )
     }
-
 }
 
 

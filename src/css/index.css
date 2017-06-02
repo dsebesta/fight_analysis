@@ -3,60 +3,27 @@ body {
 }
 
 .matchup-container {
-    /*border: 1px solid red;*/
-    height: 900px;
-    font: 0;
-    position: relative;
+    font-size: 0;
 }
 
-.innerPaperContainer {
-    width: 50%;
-    box-sizing: border-box;
-    display: inline-block;
-    text-align: center;
-}
-
-.matchup-header {
-    width: 100%
-}
-
-.matchup-left-column {
-    width: 33%;
-    min-height: 100px;
-    box-sizing: border-box;
-    display: inline-block;
-    position: relative;
-}
-
-.matchup-right-column {
-    width: 66%;
-    min-height: 100px;
+.matchup-left-col, .matchup-right-col {
+    border: 1px solid red;
     box-sizing: border-box;
     display: inline-block;
 }
 
-.matchup-header-name {
-    margin-top: 10px;
-    box-sizing: border-box;
-    display: inline-block;
-    width: 33%;
-    text-align: center;
+.matchup-right-col {
+    width: 80%;
+}
+
+.matchup-left-col {
+    width: 20%;
+    font-size: 1rem;
+}
+
+.fighter-hdr {
+    font-size: 1.2em;
+    color: black;
 }
 
 
-.table-borderless > tbody > tr > td,
-.table-borderless > tbody > tr > th,
-.table-borderless > tfoot > tr > td,
-.table-borderless > tfoot > tr > th,
-.table-borderless > thead > tr > td,
-.table-borderless > thead > tr > th {
-    border: none;
-}
-
-.table-borderless {
-    margin-bottom: 0;
-}
-
-.stat-container {
-    margin-top: 20px;
-}
