@@ -32,22 +32,37 @@ class Matchup extends Component {
         }
     }
 
-    renderPastFights(fighter) {
-        return fighter.records.map((record, index) => {
-            return (
-                    <TableRow key={index} selectable={false}>
-                        <TableRowColumn colSpan="2">{record.date}</TableRowColumn>
-                        <TableRowColumn colSpan="2">{record.name}</TableRowColumn>
-                        <TableRowColumn colSpan="2">{record.opponent}</TableRowColumn>
-                        <TableRowColumn>{record.result}</TableRowColumn>
-                        <TableRowColumn colSpan="2">{record.method}</TableRowColumn>
-                        <TableRowColumn>{record.round}</TableRowColumn>
-                        <TableRowColumn>{record.time}</TableRowColumn>
-                    </TableRow>
-                )
-        })
+    renderLevel1Stats(fighter) {
+        return (
+            <table className="table table-borderless">
+                <tbody>
+                <tr><td>{fighter.age}</td></tr>
+                <tr><td>{fighter.height}</td></tr>
+                <tr><td>{fighter.wins}</td></tr>
+                <tr><td>{fighter.losses}</td></tr>
+                <tr><td>{fighter.draw}</td></tr>
+                <tr><td>{fighter.no_contest}</td></tr>
+                <tr><td>Coming Soon</td></tr>
+                <tr><td>Coming Soon</td></tr>
+                <tr><td>Coming Soon</td></tr>
+                </tbody>
+            </table>
+        )
     }
 
+
+    renderLevel2Stats(fighter) {
+        return (
+            <table className="table table-borderless">
+                <tbody>
+                <tr><td>Coming Soon</td></tr>
+                <tr><td>Coming Soon</td></tr>
+                <tr><td>Coming Soon</td></tr>
+                <tr><td>Coming Soon</td></tr>
+                </tbody>
+            </table>
+        )
+    }
 
     render() {
 
@@ -61,49 +76,72 @@ class Matchup extends Component {
         const fighter_1 = this.setFighterInfo(1);
 
         return (
-            <div>
-                <Table>
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                        <TableRow>
-                            <TableHeaderColumn colSpan="7" tooltip={fighter_0.fighter_name} style={{textAlign: 'center'}}>
-                                {fighter_0.fighter_name}
-                            </TableHeaderColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableHeaderColumn tooltip="Date">Date</TableHeaderColumn>
-                            <TableHeaderColumn colSpan="2" tooltip="Event">Event</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Opponent">Opponent</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Result">Result</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Method">Method</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Round">Round</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Time">Time</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false}>
-                        {this.renderPastFights(fighter_0)}
-                    </TableBody>
-                </Table>
-                <Table>
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                        <TableRow>
-                            <TableHeaderColumn colSpan="7" tooltip={fighter_1.fighter_name} style={{textAlign: 'center'}}>
-                                {fighter_1.fighter_name}
-                            </TableHeaderColumn>
-                        </TableRow>
-                        <TableRow>
-                            <TableHeaderColumn tooltip="Date">Date</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Event">Event</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Opponent">Opponent</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Result">Result</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Method">Method</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Round">Round</TableHeaderColumn>
-                            <TableHeaderColumn tooltip="Time">Time</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false}>
-                        {this.renderPastFights(fighter_1)}
-                    </TableBody>
-                </Table>
+            <div className="matchup-container">
+
+                <div className="matchup-header">
+                    <div className="matchup-header-name">
+
+                    </div>
+                    <div className="matchup-header-name">
+                        <h4>{fighter_0.fighter_name}</h4>
+                    </div>
+                    <div className="matchup-header-name">
+                        <h4>{fighter_1.fighter_name}</h4>
+                    </div>
+                </div>
+
+                <div>
+                    <div className="matchup-left-column">
+                        <table className="table table-borderless">
+                            <tbody>
+                            <tr><td className="text-right">Age</td></tr>
+                            <tr><td className="text-right">Height</td></tr>
+                            <tr><td className="text-right">Wins</td></tr>
+                            <tr><td className="text-right">Losses</td></tr>
+                            <tr><td className="text-right">Draws</td></tr>
+                            <tr><td className="text-right">No Contest</td></tr>
+                            <tr><td className="text-right">Current Streak</td></tr>
+                            <tr><td className="text-right">Typically Wins By</td></tr>
+                            <tr><td className="text-right">Typically Loses By</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="matchup-right-column">
+                        <Paper zDepth={2}>
+                            <div className="innerPaperContainer">
+                                {this.renderLevel1Stats(fighter_0)}
+                            </div>
+
+                            <div className="innerPaperContainer">
+                                {this.renderLevel1Stats(fighter_1)}
+                            </div>
+                        </Paper>
+                    </div>
+                </div>
+
+                <div className="stat-container">
+                    <div className="matchup-left-column">
+                        <table className="table table-borderless">
+                            <tbody>
+                            <tr><td className="text-right">Days Since Last Fight</td></tr>
+                            <tr><td className="text-right">MMA Career Length</td></tr>
+                            <tr><td className="text-right">KO Losses</td></tr>
+                            <tr><td className="text-right">Submission Losses</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="matchup-right-column">
+                        <Paper zDepth={2}>
+                            <div className="innerPaperContainer">
+                                {this.renderLevel2Stats(fighter_0)}
+                            </div>
+
+                            <div className="innerPaperContainer">
+                                {this.renderLevel2Stats(fighter_1)}
+                            </div>
+                        </Paper>
+                    </div>
+                </div>
             </div>
         )
     }
