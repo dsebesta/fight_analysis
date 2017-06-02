@@ -1,6 +1,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchMatchup} from './../actions';
+import Paper from 'material-ui/Paper';
+import {
+    Table,
+    TableBody,
+    TableFooter,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
 
 class Matchup extends Component {
 
@@ -14,13 +24,28 @@ class Matchup extends Component {
     }
 
     setFighterInfo(id) {
-        console.log(this.props.fighter);
         if (this.props.fighter.event_fighters[id]) {
             return this.props.fighter.event_fighters[id].fighter
         }
         return {
             fighter_name: 'Unknown Fighter'
         }
+    }
+
+    renderPastFights(fighter) {
+        return fighter.records.map((record, index) => {
+            return (
+                    <TableRow key={index} selectable={false}>
+                        <TableRowColumn colSpan="2">{record.date}</TableRowColumn>
+                        <TableRowColumn colSpan="2">{record.name}</TableRowColumn>
+                        <TableRowColumn colSpan="2">{record.opponent}</TableRowColumn>
+                        <TableRowColumn>{record.result}</TableRowColumn>
+                        <TableRowColumn colSpan="2">{record.method}</TableRowColumn>
+                        <TableRowColumn>{record.round}</TableRowColumn>
+                        <TableRowColumn>{record.time}</TableRowColumn>
+                    </TableRow>
+                )
+        })
     }
 
 
@@ -37,7 +62,48 @@ class Matchup extends Component {
 
         return (
             <div>
-                <h1>{fighter_0.fighter_name} vs. {fighter_1.fighter_name}</h1>
+                <Table>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                        <TableRow>
+                            <TableHeaderColumn colSpan="7" tooltip={fighter_0.fighter_name} style={{textAlign: 'center'}}>
+                                {fighter_0.fighter_name}
+                            </TableHeaderColumn>
+                        </TableRow>
+                        <TableRow>
+                            <TableHeaderColumn tooltip="Date">Date</TableHeaderColumn>
+                            <TableHeaderColumn colSpan="2" tooltip="Event">Event</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Opponent">Opponent</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Result">Result</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Method">Method</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Round">Round</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Time">Time</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody displayRowCheckbox={false}>
+                        {this.renderPastFights(fighter_0)}
+                    </TableBody>
+                </Table>
+                <Table>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                        <TableRow>
+                            <TableHeaderColumn colSpan="7" tooltip={fighter_1.fighter_name} style={{textAlign: 'center'}}>
+                                {fighter_1.fighter_name}
+                            </TableHeaderColumn>
+                        </TableRow>
+                        <TableRow>
+                            <TableHeaderColumn tooltip="Date">Date</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Event">Event</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Opponent">Opponent</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Result">Result</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Method">Method</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Round">Round</TableHeaderColumn>
+                            <TableHeaderColumn tooltip="Time">Time</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody displayRowCheckbox={false}>
+                        {this.renderPastFights(fighter_1)}
+                    </TableBody>
+                </Table>
             </div>
         )
     }
