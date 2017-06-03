@@ -26,16 +26,21 @@ const BodyStats = (props) => {
     props.fighter_1.ip = 'In Progress';
     return (
         <Table>
-            <TableBody displayRowCheckbox={false}>
+            <TableBody displayRowCheckbox={false} showRowHover={true}>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>MMA Career Length</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_0.mma_career} Years</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_1.mma_career} Years</TableRowColumn>
                 </TableRow>
                 <TableRow style={tableStyle.row}>
+                    <TableRowColumn style={tableStyle.columnHdr}>Total MMA Rounds</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.mma_rounds}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.mma_rounds}</TableRowColumn>
+                </TableRow>
+                <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>Average Rounds / Year</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{parseInt(props.fighter_0.mma_rounds / props.fighter_0.mma_career).toFixed(1)}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{parseInt(props.fighter_1.mma_rounds / props.fighter_1.mma_career).toFixed(1)}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.avg_rounds}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.avg_rounds}</TableRowColumn>
                 </TableRow>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>KO Losses</TableRowColumn>
@@ -43,7 +48,7 @@ const BodyStats = (props) => {
                     <TableRowColumn style={tableStyle.column}>{props.fighter_1.ko_loss}</TableRowColumn>
                 </TableRow>
                 <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>Submissions Losses</TableRowColumn>
+                    <TableRowColumn style={tableStyle.columnHdr}>Submission Losses</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_0.sub_loss}</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_1.sub_loss}</TableRowColumn>
                 </TableRow>

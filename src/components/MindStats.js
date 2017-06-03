@@ -23,7 +23,7 @@ const tableStyle = {
 const MindStats = (props) => {
     return (
         <Table>
-            <TableBody displayRowCheckbox={false}>
+            <TableBody displayRowCheckbox={false} showRowHover={true}>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>Days Since Last Fight</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_0.days_last_fight}</TableRowColumn>
@@ -49,11 +49,7 @@ const MindStats = (props) => {
                     <TableRowColumn style={tableStyle.column}>{props.fighter_0.ufc_fights}</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_1.ufc_fights}</TableRowColumn>
                 </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>Total MMA Rounds</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.mma_rounds}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.mma_rounds}</TableRowColumn>
-                </TableRow>
+
             </TableBody>
         </Table>
     )

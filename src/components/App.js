@@ -17,6 +17,7 @@ import Nav from './Nav';
 import Login from './Login';
 import Admin from './Admin';
 import Matchup from './Matchup';
+import Fighter from './Fighter';
 
 class App extends Component {
 
@@ -35,6 +36,7 @@ class App extends Component {
                                 <Route exact path="/" component={Events} />
                                 <Route exact path="/events/:id" component={Event} />
                                 <Route exact path="/events/:id/:match" component={Matchup} />
+                                <Route exact path="/fighter/:id" component={Fighter} />
                                 <Route path="/get_started" component={GetStarted} />
                                 <Route path="/find" component={Find} />
                                 <Route path="/login" component={Login} />

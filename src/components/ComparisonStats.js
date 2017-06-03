@@ -27,7 +27,7 @@ const ComparisonStats = (props) => {
 
     return (
         <Table>
-            <TableBody displayRowCheckbox={false}>
+            <TableBody displayRowCheckbox={false} showRowHover={true}>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>at Similar Elevation</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
