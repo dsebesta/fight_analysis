@@ -2,7 +2,6 @@ import React from 'react';
 import {
     Table,
     TableBody,
-    TableFooter,
     TableHeader,
     TableHeaderColumn,
     TableRow,
@@ -16,7 +15,6 @@ const tableStyle = {
     },
     columnHdr: {
         textAlign: "right",
-        paddingLeft: "80px",
         height: "25px"
     },
     row: {
@@ -24,8 +22,11 @@ const tableStyle = {
     }
 };
 
-
 const GeneralStats = (props) => {
+
+    props.fighter_0.ip = 'In Progress';
+    props.fighter_1.ip = 'In Progress';
+
     return (
         <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
@@ -37,14 +38,14 @@ const GeneralStats = (props) => {
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
                 <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>Age</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.age}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.age}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>Height</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_0.height}</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_1.height}</TableRowColumn>
+                </TableRow>
+                <TableRow style={tableStyle.row}>
+                    <TableRowColumn style={tableStyle.columnHdr}>Reach</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
                 </TableRow>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>Win</TableRowColumn>

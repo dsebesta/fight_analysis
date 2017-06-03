@@ -1,17 +1,10 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchMatchup} from './../actions';
-import Paper from 'material-ui/Paper';
-import {
-    Table,
-    TableBody,
-    TableFooter,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
 import GeneralStats from './GeneralStats';
+import MindStats from './MindStats';
+import BodyStats from './BodyStats';
+import ComparisonStats from './ComparisonStats';
 
 class Matchup extends Component {
 
@@ -53,12 +46,29 @@ class Matchup extends Component {
         return (
             <div className="matchup-container">
                 <div className="matchup-left-col">
-                    General
+                    <span className="matchup-sections">General</span>
                 </div>
                 <div className="matchup-right-col">
                     <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
                 </div>
-
+                <div className="matchup-left-col">
+                    <span className="matchup-sections">Mind</span>
+                </div>
+                <div className="matchup-right-col">
+                    <MindStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                </div>
+                <div className="matchup-left-col">
+                    <span className="matchup-sections">Body</span>
+                </div>
+                <div className="matchup-right-col">
+                    <BodyStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                </div>
+                <div className="matchup-left-col">
+                    <span className="matchup-sections">Comparison</span>
+                </div>
+                <div className="matchup-right-col">
+                    <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                </div>
             </div>
         )
     }

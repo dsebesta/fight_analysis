@@ -22,8 +22,8 @@ class Events extends Component {
 
             return (
                 <tr key={index}>
-                    <td> <Link to={route}>{fNames[0]} </Link></td>
-                    <td> vs. </td>
+                    <td className="text-right"> <Link to={route}>{fNames[0]} </Link></td>
+                    <td className="text-center"> vs. </td>
                     <td> <Link to={route}>{fNames[1]} </Link></td>
                 </tr>
             )
@@ -37,8 +37,6 @@ class Events extends Component {
                 <h3>Loading....</h3>
             )
         }
-
-        console.log(this.props.event);
 
         return (
             <div className="home-container">

@@ -4,26 +4,50 @@ body {
 
 .matchup-container {
     font-size: 0;
+    display: flex;
+    flex-wrap: wrap;
+
 }
 
 .matchup-left-col, .matchup-right-col {
-    border: 1px solid red;
+    /*border: 1px solid red;*/
     box-sizing: border-box;
-    display: inline-block;
+
+
 }
 
 .matchup-right-col {
+    flex-grow: 2;
+    padding: 10px 0 10px 0;
     width: 80%;
 }
 
 .matchup-left-col {
-    width: 20%;
-    font-size: 1rem;
+    display: none;
 }
 
 .fighter-hdr {
     font-size: 1.2em;
     color: black;
+}
+
+.matchup-sections {
+
+}
+
+@media only screen and (min-width: 768px) {
+
+    .matchup-left-col {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-grow: 1;
+        padding: 0 30px 0 30px;
+        font-size: .8rem;
+        width: 20%;
+    }
+
+
 }
 
 
