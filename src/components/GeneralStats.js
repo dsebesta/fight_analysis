@@ -28,7 +28,7 @@ const GeneralStats = (props) => {
     props.fighter_0.ip = 'In Progress';
     props.fighter_1.ip = 'In Progress';
     const route_0 = '/fighter/' + (props.fighter_0.fighter_id);
-    const route_1 = '/fighter/' + (props.fighter_0.fighter_id);
+    const route_1 = '/fighter/' + (props.fighter_1.fighter_id);
 
     return (
         <Table>

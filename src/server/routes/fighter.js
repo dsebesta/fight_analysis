@@ -5,7 +5,7 @@ const Event = model.Event;
 const Fighter = model.Fighter;
 const EventFighters = model.EventFighters;
 const Record = model.Record;
-const addtlStats = require('../util/statCalculation');
+const addtlStats = require('../util/stat_calculation');
 
 
 router.get('/:id/:matchup', (req, res) => {
@@ -42,6 +42,9 @@ router.get('/:id', (req, res) => {
     Fighter.findOne({
         where: {
             fighter_id: fighter_id
+        },
+        include: {
+            model: Record
         }
     })
         .then(results => {
