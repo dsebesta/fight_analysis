@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "webpack-dev-server --open --history-api-fallback",
-    "server": "node ./src/server/app.js"
+    "server": "nodemon ./src/server/app.js"
   },
   "babel": {
     "presets": [

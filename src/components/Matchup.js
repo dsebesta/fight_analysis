@@ -1,8 +1,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchMatchup} from './../actions';
+import GeneralStats from './GeneralStats';
+import MindStats from './MindStats';
+import BodyStats from './BodyStats';
+import ComparisonStats from './ComparisonStats';
 
 class Matchup extends Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     componentWillMount() {
         const path = document.location.href;
@@ -14,7 +22,6 @@ class Matchup extends Component {
     }
 
     setFighterInfo(id) {
-        console.log(this.props.fighter);
         if (this.props.fighter.event_fighters[id]) {
             return this.props.fighter.event_fighters[id].fighter
         }
@@ -22,6 +29,7 @@ class Matchup extends Component {
             fighter_name: 'Unknown Fighter'
         }
     }
+
 
 
     render() {
@@ -36,12 +44,34 @@ class Matchup extends Component {
         const fighter_1 = this.setFighterInfo(1);
 
         return (
-            <div>
-                <h1>{fighter_0.fighter_name} vs. {fighter_1.fighter_name}</h1>
+            <div className="matchup-container">
+                <div className="matchup-left-col">
+                    <span className="matchup-sections">General</span>
+                </div>
+                <div className="matchup-right-col">
+                    <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                </div>
+                <div className="matchup-left-col">
+                    <span className="matchup-sections">Mind</span>
+                </div>
+                <div className="matchup-right-col">
+                    <MindStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                </div>
+                <div className="matchup-left-col">
+                    <span className="matchup-sections">Body</span>
+                </div>
+                <div className="matchup-right-col">
+                    <BodyStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                </div>
+                <div className="matchup-left-col">
+                    <span className="matchup-sections">Comparison</span>
+                </div>
+                <div className="matchup-right-col">
+                    <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                </div>
             </div>
         )
     }
-
 }
 
 

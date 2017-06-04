@@ -1,8 +1,8 @@
-import {FETCH_FIGHTERS, FETCH_MATCHUP} from './../actions/types';
+import {FETCH_FIGHTER, FETCH_MATCHUP} from './../actions/types';
 
 function fighterData(state = {}, action) {
     switch (action.type) {
-        case FETCH_FIGHTERS:
+        case FETCH_FIGHTER:
             let newState = JSON.parse(JSON.stringify(state));
             newState = action.payload.data;
             return newState;
