@@ -71,6 +71,30 @@ module.exports = (sequelize, DataTypes) => {
         },
         association: {
             type: DataTypes.STRING
+        },
+        ufc_fights: {
+            type: DataTypes.INTEGER
+        },
+        mma_rounds: {
+            type: DataTypes.INTEGER
+        },
+        days_last_fight: {
+            type: DataTypes.INTEGER
+        },
+        days_last_win: {
+            type: DataTypes.INTEGER
+        },
+        days_last_loss: {
+            type: DataTypes.INTEGER
+        },
+        years_mma_career: {
+            type: DataTypes.INTEGER
+        },
+        off_loss: {
+            type: DataTypes.STRING
+        },
+        year_avg_rounds: {
+            type: DataTypes.FLOAT
         }
     });
     return Fighter;

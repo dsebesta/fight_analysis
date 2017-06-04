@@ -362,6 +362,7 @@ module.exports.getFighterData = (url, id) => {
                 });
 
 
+
                 resolve(fighter_stats);
             }
             else {
