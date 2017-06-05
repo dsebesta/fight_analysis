@@ -272,7 +272,7 @@ module.exports.getFighterData = (url, id) => {
                     const weight = el.find('.item.weight strong').text();
                     const weight_class = el.find('.item.wclass strong').text();
 
-                    fighter_stats.info.age = age.slice(5) || 0;
+                    fighter_stats.info.age = age.slice(5) || "0";
                     fighter_stats.info.birthday = birthday;
                     fighter_stats.info.locality = locality;
                     fighter_stats.info.nationality = nationality;
@@ -281,7 +281,6 @@ module.exports.getFighterData = (url, id) => {
                     fighter_stats.info.weight = weight;
                     fighter_stats.info.weight_class = weight_class;
                 });
-                // console.log($('h2:contains("Fight History - Pro")').parent().parent().first());
                 // Fighter Fight History
                 $('h2:contains("Fight History - Pro")').parent().parent().first().find('tr:not(.table_head)').each(function() {
                     const el = $(this);
