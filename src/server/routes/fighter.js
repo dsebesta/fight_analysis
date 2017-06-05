@@ -34,14 +34,14 @@ router.get('/:id/:matchup', (req, res) => {
 
 router.get('/:id', (req, res) => {
     const fighter_id = parseInt(req.params.id);
-
     Fighter.findOne({
         where: {
             fighter_id: fighter_id
         },
         include: {
             model: Record
-        }
+        },
+        order: [[Record, 'date', 'DESC']]
     })
         .then(results => {
             res.status(200).json(results)
