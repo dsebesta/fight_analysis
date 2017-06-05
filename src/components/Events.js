@@ -2,6 +2,28 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchEventsAll} from './../actions';
 import {Link} from 'react-router-dom';
+import {
+    Table,
+    TableBody,
+    TableHeader,
+    TableHeaderColumn,
+    TableRow,
+    TableRowColumn,
+} from 'material-ui/Table';
+
+const tableStyle = {
+    column: {
+        textAlign: "center",
+        height: "20px"
+    },
+    columnHdr: {
+        textAlign: "center",
+        height: "25px"
+    },
+    row: {
+        height: "20px"
+    }
+};
 
 class Events extends Component {
 
@@ -9,25 +31,20 @@ class Events extends Component {
         this.props.fetchEventsAll();
     }
 
+    handleClick(route) {
+        this.props.history.push(route)
+    }
+
     renderEvents() {
         return this.props.events.map((event, index) => {
-            // const route = '/events/ufc' + (event.event_id * 1.337);
             const route = '/events/ufc' + (event.event_id);
 
             return (
-                <tr key={index}>
-
-                    <td> {event.event_date} </td>
-
-                    <td>
-                        <Link to={route}>
-                            {event.title}
-                        </Link>
-                    </td>
-
-                    <td> {event.venue} </td>
-
-                </tr>
+                <TableRow key={index} style={tableStyle.row} onTouchTap={this.handleClick.bind(this, route)}>
+                    <TableRowColumn style={tableStyle.column}> {event.event_date} </TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}> {event.title} </TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}> {event.venue} </TableRowColumn>
+                </TableRow>
             )
         });
     }
@@ -42,18 +59,18 @@ class Events extends Component {
 
         return (
             <div className="home-container">
-                <table className="table table-striped">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Title</th>
-                            <th>Location</th>
-                        </tr>
-                    </thead>
-                    <tbody className="table-hover">
+                <Table>
+                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
+                        <TableRow style={tableStyle.row}>
+                            <TableHeaderColumn style={tableStyle.columnHdr}>Date</TableHeaderColumn>
+                            <TableHeaderColumn style={tableStyle.columnHdr}>Title</TableHeaderColumn>
+                            <TableHeaderColumn style={tableStyle.columnHdr}>Location</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody displayRowCheckbox={false} showRowHover={true}>
                         {this.renderEvents()}
-                    </tbody>
-                </table>
+                    </TableBody>
+                </Table>
             </div>
         )
     }

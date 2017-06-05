@@ -342,39 +342,56 @@ router.post('/scrape_data', (request, response) => {
 });
 
 
-router.get('/test', (req, res) => {
+router.get('/stat_calc', (req, res) => {
     console.log('start');
-    Fighter.findAll({
-        include: [
-            {
-                model: EventFighters,
-                include: {
-                    model: Event
-                }
-            },
-            {
-                model: Record
-            }]
-    })
-        .then((fighters_array) => {
-        console.log('found all fighters', fighters_array);
-            return Promise.all(
-                fighters_array.map(fighter => {
-                    return new Promise((res, rej) => {
-                        stats.statCalc(fighter)
-                            .then(updated_fighter_info => {
-                                setTimeout(() => {
-                                    console.log('stat calc done: ' + updated_fighter_info.fighter_id);
-                                    res(updated_fighter_info)
-                                }, 500)
-                            })
-                            .catch(err => {
-                                rej(err)
-                            })
-                    })
-                })
-            )
+    Fighter.findOne({
+        where: {
+            fighter_id: fighter.fighter_id
+        }
+    }).then((foundFighter) => {
+        foundFighter.update({
+            "fighter_id": fighter.fighter_id,
+            "fighter_name": fighter.fighter_name,
+            "fighter_url": fighter.fighter_url,
+            "wins": fighter.wins,
+            "wins_ko": fighter.wins_ko,
+            "wins_sub": fighter.wins_sub,
+            "wins_dec": fighter.wins_dec,
+            "wins_other": fighter.wins_other,
+            "losses": fighter.losses,
+            "losses_ko": fighter.losses_ko,
+            "losses_sub": fighter.losses_sub,
+            "losses_dec": fighter.losses_dec,
+            "losses_other": fighter.losses_other,
+            "no_contest": fighter.no_contest,
+            "draw": fighter.draw,
+            "height": fighter.height,
+            "weight": fighter.weight,
+            "weight_class": fighter.weight_class,
+            "age": fighter.age,
+            "birthday": fighter.birthday,
+            "locality": fighter.locality,
+            "nationality": fighter.nationality,
+            "association": fighter.association,
+            "ufc_fights": fighter.ufc_fights,
+            "mma_rounds": fighter.mma_rounds,
+            "days_last_fight": fighter.days_last_fight,
+            "days_last_win": fighter.days_last_win,
+            "days_last_loss": fighter.days_last_loss,
+            "years_mma_career": fighter.years_mma_career,
+            "off_loss": fighter.off_loss,
+            "year_avg_rounds": fighter.year_avg_rounds
         })
+            .then(() => {
+                console.log('stat calc for fighter_id: ' + fighter.fighter_id);
+                res(fighter.fighter_id)
+            })
+            .catch(err => {
+                    console.log('stat calc failed to import', err);
+                    rej(fighter.fighter_id)
+                }
+            )
+    })
         .then(array => {
             console.log('sync complete');
             res.status(200).json(array)

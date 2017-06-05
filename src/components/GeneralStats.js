@@ -33,7 +33,7 @@ const GeneralStats = (props) => {
     return (
         <Table>
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                <TableRow style={tableStyle.row} >
+                <TableRow style={tableStyle.row}>
                     <TableHeaderColumn style={tableStyle.column}></TableHeaderColumn>
                     <TableHeaderColumn style={tableStyle.column}><Link to={route_0}><span className="fighter-hdr">{props.fighter_0.fighter_name}</span></Link></TableHeaderColumn>
                     <TableHeaderColumn style={tableStyle.column}><Link to={route_1}><span className="fighter-hdr">{props.fighter_1.fighter_name}</span></Link></TableHeaderColumn>
