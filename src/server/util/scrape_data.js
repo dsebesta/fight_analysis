@@ -281,9 +281,9 @@ module.exports.getFighterData = (url, id) => {
                     fighter_stats.info.weight = weight;
                     fighter_stats.info.weight_class = weight_class;
                 });
-
+                // console.log($('h2:contains("Fight History - Pro")').parent().parent().first());
                 // Fighter Fight History
-                $('.module.fight_history tr:not(.table_head)').each(function() {
+                $('h2:contains("Fight History - Pro")').parent().parent().first().find('tr:not(.table_head)').each(function() {
                     const el = $(this);
                     const result = el.find('td:nth-child(1) .final_result').text();
                     const opponent_name = el.find('td:nth-child(2) a').text();
@@ -360,6 +360,7 @@ module.exports.getFighterData = (url, id) => {
                         fighter_stats.fights.push(fight);
                     }
                 });
+
 
 
                 resolve(fighter_stats);

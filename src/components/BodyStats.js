@@ -29,8 +29,8 @@ const BodyStats = (props) => {
             <TableBody displayRowCheckbox={false} showRowHover={true}>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>MMA Career Length</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.mma_career} Years</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.mma_career} Years</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.years_mma_career} Years</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.years_mma_career} Years</TableRowColumn>
                 </TableRow>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>Total MMA Rounds</TableRowColumn>
@@ -39,18 +39,18 @@ const BodyStats = (props) => {
                 </TableRow>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>Average Rounds / Year</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.avg_rounds}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.avg_rounds}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.year_avg_rounds}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.year_avg_rounds}</TableRowColumn>
                 </TableRow>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>KO Losses</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ko_loss}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ko_loss}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.losses_ko}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.losses_ko}</TableRowColumn>
                 </TableRow>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>Submission Losses</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.sub_loss}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.sub_loss}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.losses_sub}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.losses_sub}</TableRowColumn>
                 </TableRow>
                 <TableRow style={tableStyle.row}>
                     <TableRowColumn style={tableStyle.columnHdr}>Days Since Last KO Loss</TableRowColumn>

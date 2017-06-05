@@ -6,6 +6,7 @@ const Fighter = model.Fighter;
 const EventFighters = model.EventFighters;
 const Record = model.Record;
 const ufcSync = require('../util/scrape_data');
+const stats = require('../util/stat_calculation');
 
 router.get('/', function(req, res) {
     res.send('is this thing working?')
@@ -13,23 +14,24 @@ router.get('/', function(req, res) {
 
 router.post('/scrape_data', (request, response) => {
 
-    // const test = [{
-    //     title: 'test event',
-    //     venue: 'test venue',
-    //     event_date: '2019-01-01',
-    //     sherdog_url: 'http://www.sherdog.com/events/UFC-214-Cormier-vs-Jones-2-57825',
-    //     event_id: 57825
-    // }];
+    const test = [{
+        title: 'test event',
+        venue: 'test venue',
+        event_date: '2019-01-01',
+        sherdog_url: 'http://www.sherdog.com/events/UFC-Fight-Night-110-Hunt-vs-Lewis-58411',
+        event_id: 58411
+    }];
 
     const resultsObj = {};
     const fightsArray = [];
+
     // Scrape event data from sherdog
     ufcSync.getUpcomingEvents()
         .then((events) => {
             return Promise.all(
                 // Go through each event, see if it exists. Update the mySQL database if it does, create if it doesn't.
                 // Create a promise for each event so script does not moved forward until all are complete.
-                 events.map(event => {
+                 test.map(event => {
                      return new Promise((res, rej) => {
                          Event.findOne(event, {
                              where: {
@@ -238,14 +240,145 @@ router.post('/scrape_data', (request, response) => {
             )
 
         })
+
         .then((fightRecordsImported) => {
             resultsObj.fightRecordsImported = fightRecordsImported;
-            response.status(200).json({Results: resultsObj});
-            console.log('** sync completed **')
+
+            console.log('start');
+            Fighter.findAll({
+                include: [
+                    {
+                        model: EventFighters,
+                        include: {
+                            model: Event
+                        }
+                    },
+                    {
+                        model: Record
+                    }]
+            })
+
+                .then((fighters_array) => {
+                    console.log('found all fighters');
+                    return Promise.all(
+                        fighters_array.map(fighter => {
+                            return new Promise((res, rej) => {
+                                stats.statCalc(fighter)
+                                    .then(updated_fighter_info => {
+                                        setTimeout(() => {
+                                            console.log('stat calc done: ' + updated_fighter_info.fighter_name);
+                                            res(updated_fighter_info)
+                                        }, 500)
+                                    })
+                                    .catch(err => {
+                                        rej(err)
+                                    })
+                            })
+                        })
+                    )
+                })
+                .then((stat_calc_fighters) => {
+                    return Promise.all(
+                        stat_calc_fighters.map(fighter => {
+                            return new Promise((res, rej) => {
+                                Fighter.findOne({
+                                    where: {
+                                        fighter_id: fighter.fighter_id
+                                    }
+                                }).then((foundFighter) => {
+                                    foundFighter.update({
+                                        "fighter_id": fighter.fighter_id,
+                                        "fighter_name": fighter.fighter_name,
+                                        "fighter_url": fighter.fighter_url,
+                                        "wins": fighter.wins,
+                                        "wins_ko": fighter.wins_ko,
+                                        "wins_sub": fighter.wins_sub,
+                                        "wins_dec": fighter.wins_dec,
+                                        "wins_other": fighter.wins_other,
+                                        "losses": fighter.losses,
+                                        "losses_ko": fighter.losses_ko,
+                                        "losses_sub": fighter.losses_sub,
+                                        "losses_dec": fighter.losses_dec,
+                                        "losses_other": fighter.losses_other,
+                                        "no_contest": fighter.no_contest,
+                                        "draw": fighter.draw,
+                                        "height": fighter.height,
+                                        "weight": fighter.weight,
+                                        "weight_class": fighter.weight_class,
+                                        "age": fighter.age,
+                                        "birthday": fighter.birthday,
+                                        "locality": fighter.locality,
+                                        "nationality": fighter.nationality,
+                                        "association": fighter.association,
+                                        "ufc_fights": fighter.ufc_fights,
+                                        "mma_rounds": fighter.mma_rounds,
+                                        "days_last_fight": fighter.days_last_fight,
+                                        "days_last_win": fighter.days_last_win,
+                                        "days_last_loss": fighter.days_last_loss,
+                                        "years_mma_career": fighter.years_mma_career,
+                                        "off_loss": fighter.off_loss,
+                                        "year_avg_rounds": fighter.year_avg_rounds
+                                    })
+                                        .then(() => {
+                                            console.log('stat calc for fighter_id: ' + fighter.fighter_id);
+                                            res(fighter.fighter_id)
+                                        })
+                                        .catch(err => {
+                                                console.log('stat calc failed to import', err);
+                                                rej(fighter.fighter_id)
+                                            }
+                                        )
+                                })
+                            })
+                        })
+                    )
+                })
+                .then((stat_calc_import) => {
+                    resultsObj.stat_calc_import = stat_calc_import;
+                    response.status(200).json({Results: resultsObj});
+                    console.log('** sync completed **')
+                })
         })
 });
 
-router.post('/scrape_fighter_info', (req, res) => {
+
+router.get('/test', (req, res) => {
+    console.log('start');
+    Fighter.findAll({
+        include: [
+            {
+                model: EventFighters,
+                include: {
+                    model: Event
+                }
+            },
+            {
+                model: Record
+            }]
+    })
+        .then((fighters_array) => {
+        console.log('found all fighters', fighters_array);
+            return Promise.all(
+                fighters_array.map(fighter => {
+                    return new Promise((res, rej) => {
+                        stats.statCalc(fighter)
+                            .then(updated_fighter_info => {
+                                setTimeout(() => {
+                                    console.log('stat calc done: ' + updated_fighter_info.fighter_id);
+                                    res(updated_fighter_info)
+                                }, 500)
+                            })
+                            .catch(err => {
+                                rej(err)
+                            })
+                    })
+                })
+            )
+        })
+        .then(array => {
+            console.log('sync complete');
+            res.status(200).json(array)
+        })
 });
 
 module.exports = router;
