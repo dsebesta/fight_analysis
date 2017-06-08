@@ -6,6 +6,10 @@ tr:hover {
     cursor: pointer;
 }
 
+.events-container {
+    overflow: auto;
+}
+
 .matchup-container {
     font-size: 0;
     display: flex;

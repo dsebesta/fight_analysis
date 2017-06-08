@@ -5,8 +5,8 @@ const instance = axios.create({
     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
 });
 
-// const BASE_URL = 'http://derricksebesta.com:3000/api';
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'http://derricksebesta.com:3000/api';
+// const BASE_URL = 'http://localhost:3000/api';
 
 export function sqlImport() {
     const request = instance.post(`${BASE_URL}/admin/scrape_data`);

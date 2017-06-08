@@ -58,7 +58,7 @@ class Events extends Component {
         }
 
         return (
-            <div className="home-container">
+            <div className="events-container">
                 <Table>
                     <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                         <TableRow style={tableStyle.row}>
