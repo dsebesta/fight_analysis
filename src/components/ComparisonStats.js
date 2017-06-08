@@ -48,6 +48,16 @@ const ComparisonStats = (props) => {
                     <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
                     <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
                 </TableRow>
+                <TableRow style={tableStyle.row}>
+                    <TableRowColumn style={tableStyle.columnHdr}>Typically Wins By</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
+                </TableRow>
+                <TableRow style={tableStyle.row}>
+                    <TableRowColumn style={tableStyle.columnHdr}>Typically Loses By</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
+                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
+                </TableRow>
             </TableBody>
         </Table>
     )
