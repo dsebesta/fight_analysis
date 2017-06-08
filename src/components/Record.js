@@ -81,7 +81,7 @@ class Record extends Component {
                 <div>
                     {this.renderNavbar()}
                     <div className="matchup-container">
-                        <CommonOpponents />
+                        <CommonOpponents common_opponents={this.props.common_opponents}/>
                     </div>
                 </div>
             )

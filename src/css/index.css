@@ -11,8 +11,23 @@ tr:hover {
     display: flex;
     flex-wrap: wrap;
     border: 1px solid rgb(224, 224, 224);
-
 }
+
+.common-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.common-section-left {
+    border: 1px solid rgb(224, 224, 224);
+    margin-right: 5px;
+}
+
+.common-section-right {
+    border: 1px solid rgb(224, 224, 224);
+}
+
+
 
 .matchup-right-col {
     padding: 10px 0 10px 0;
