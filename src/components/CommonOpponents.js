@@ -29,23 +29,47 @@ class CommonOpponents extends Component {
 
     }
 
-    renderPastFights(fighter) {
-        return fighter.records.map((record, index) => {
+    renderCommonFighter0() {
+        const opponentObject = this.props.common_opponents;
+        const opponentKeys = Object.keys(this.props.common_opponents);
 
-            let resultFormat;
-            if (record.result === 'win') resultFormat = 'win-record';
-            if (record.result === 'loss') resultFormat = 'loss-record';
+        return opponentKeys.map((opponent) => {
+            return opponentObject[opponent].map((fight, index) => {
+                const fight0 = fight[0];
+                let resultFormat;
+                if (fight0.result === 'win') resultFormat = 'win-record';
+                if (fight0.result === 'loss') resultFormat = 'loss-record';
+                return (
+                    <TableRow key={index} style={tableStyle.row} className={resultFormat}>
+                        <TableRowColumn style={tableStyle.column}> {fight0.date} </TableRowColumn>
+                        <TableRowColumn style={tableStyle.column}> {fight0.opponent} </TableRowColumn>
+                        <TableRowColumn style={tableStyle.column}> {fight0.round} </TableRowColumn>
+                        <TableRowColumn style={tableStyle.column}> {fight0.method} </TableRowColumn>
+                    </TableRow>
+                )
+            })
+        })
+    }
 
-            return (
-                <TableRow key={index} style={tableStyle.row} className={resultFormat}>
-                    <TableRowColumn style={tableStyle.column}> {record.date} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.opponent} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.round} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.time} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.result} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.method} </TableRowColumn>
-                </TableRow>
-            )
+    renderCommonFighter1() {
+        const opponentObject = this.props.common_opponents;
+        const opponentKeys = Object.keys(this.props.common_opponents);
+
+        return opponentKeys.map((opponent) => {
+            return opponentObject[opponent].map((fight, index) => {
+                const fight1 = fight[1];
+                let resultFormat;
+                if (fight1.result === 'win') resultFormat = 'win-record';
+                if (fight1.result === 'loss') resultFormat = 'loss-record';
+                return (
+                    <TableRow key={index} style={tableStyle.row} className={resultFormat}>
+                        <TableRowColumn style={tableStyle.column}> {fight1.date} </TableRowColumn>
+                        <TableRowColumn style={tableStyle.column}> {fight1.opponent} </TableRowColumn>
+                        <TableRowColumn style={tableStyle.column}> {fight1.round} </TableRowColumn>
+                        <TableRowColumn style={tableStyle.column}> {fight1.method} </TableRowColumn>
+                    </TableRow>
+                )
+            })
         })
     }
 
@@ -54,8 +78,8 @@ class CommonOpponents extends Component {
     render() {
 
         return (
-            <div>
-                <div>
+            <div className="common-container">
+                <div className="common-section-left">
                     <Table>
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                             <TableRow style={tableStyle.row}>
@@ -66,11 +90,11 @@ class CommonOpponents extends Component {
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false} showRowHover={true}>
-                            {this.renderPastFights(activeTab)}
+                            {this.renderCommonFighter0()}
                         </TableBody>
                     </Table>
                 </div>
-                <div>
+                <div className="common-section-right">
                     <Table>
                         <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
                             <TableRow style={tableStyle.row}>
@@ -81,11 +105,10 @@ class CommonOpponents extends Component {
                             </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false} showRowHover={true}>
-                            {this.renderPastFights(activeTab)}
+                            {this.renderCommonFighter1()}
                         </TableBody>
                     </Table>
                 </div>
-
             </div>
         )
 

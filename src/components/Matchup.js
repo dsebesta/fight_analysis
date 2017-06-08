@@ -69,6 +69,7 @@ class Matchup extends Component {
 
         const fighter_0 = this.setFighterInfo(0);
         const fighter_1 = this.setFighterInfo(1);
+        const common_opponents = this.props.fighter.common;
         const {activeTab} = this.state;
 
         if (activeTab) {
@@ -96,7 +97,7 @@ class Matchup extends Component {
             return (
                 <div>
                     {this.renderNavbar()}
-                    <Record fighter_0={fighter_0} fighter_1={fighter_1} />
+                    <Record fighter_0={fighter_0} fighter_1={fighter_1} common_opponents={common_opponents}/>
                 </div>
             )
 
