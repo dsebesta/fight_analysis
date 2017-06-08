@@ -5,11 +5,20 @@ import GeneralStats from './GeneralStats';
 import MindStats from './MindStats';
 import BodyStats from './BodyStats';
 import ComparisonStats from './ComparisonStats';
+import Record from './Record';
+
 
 class Matchup extends Component {
 
     constructor(props) {
         super(props);
+
+        this.handleClick = this.handleClick.bind(this);
+        this.renderNavbar = this.renderNavbar.bind(this);
+
+        this.state = {
+            activeTab: true
+        }
     }
 
     componentWillMount() {
@@ -30,6 +39,24 @@ class Matchup extends Component {
         }
     }
 
+    renderNavbar() {
+        const {activeTab} = this.state;
+        const activeClassStats = `stats-tab ${activeTab ? 'active' : ''}`;
+        const activeClassRecord = `record-tab ${!activeTab ? 'active' : ''}`;
+
+        return (
+            <div className="matchup-navbar">
+                <div className={activeClassStats} onTouchTap={!activeTab ? this.handleClick : ''}>STATS</div>
+                <div className={activeClassRecord} onTouchTap={activeTab ? this.handleClick : ''}>RECORD</div>
+            </div>
+        )
+    }
+
+    handleClick() {
+        this.setState({
+            activeTab: !this.state.activeTab
+        })
+    }
 
 
     render() {
@@ -42,35 +69,38 @@ class Matchup extends Component {
 
         const fighter_0 = this.setFighterInfo(0);
         const fighter_1 = this.setFighterInfo(1);
+        const {activeTab} = this.state;
 
-        return (
-            <div className="matchup-container">
-                <div className="matchup-left-col">
-                    <span className="matchup-sections">General</span>
+        if (activeTab) {
+            return (
+               <div>
+                   {this.renderNavbar()}
+                   <div className="matchup-container">
+                       <div className="matchup-right-col">
+                           <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       </div>
+                       <div className="matchup-right-col">
+                           <MindStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       </div>
+                       <div className="matchup-right-col">
+                           <BodyStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       </div>
+                       <div className="matchup-right-col">
+                           <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       </div>
+                   </div>
+               </div>
+           )
+        }
+        else {
+            return (
+                <div>
+                    {this.renderNavbar()}
+                    <Record fighter_0={fighter_0} fighter_1={fighter_1} />
                 </div>
-                <div className="matchup-right-col">
-                    <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                </div>
-                <div className="matchup-left-col">
-                    <span className="matchup-sections">Mind</span>
-                </div>
-                <div className="matchup-right-col">
-                    <MindStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                </div>
-                <div className="matchup-left-col">
-                    <span className="matchup-sections">Body</span>
-                </div>
-                <div className="matchup-right-col">
-                    <BodyStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                </div>
-                <div className="matchup-left-col">
-                    <span className="matchup-sections">Comparison</span>
-                </div>
-                <div className="matchup-right-col">
-                    <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                </div>
-            </div>
-        )
+            )
+
+        }
     }
 }
 

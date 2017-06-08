@@ -10,39 +10,89 @@ tr:hover {
     font-size: 0;
     display: flex;
     flex-wrap: wrap;
-}
+    border: 1px solid rgb(224, 224, 224);
 
-.matchup-left-col, .matchup-right-col {
-    box-sizing: border-box;
 }
 
 .matchup-right-col {
-    flex-grow: 2;
     padding: 10px 0 10px 0;
-    width: 80%;
+    box-sizing: border-box;
 }
 
-.matchup-left-col {
-    display: none;
+.matchup-navbar {
+    display: flex;
+    margin-top: 30px;
 }
+
+.matchup-record-compare-navbar {
+    display: flex;
+}
+
+.stats-tab, .record-tab {
+    width: 50%;
+    text-align: center;
+    border-top: 1px solid rgb(224, 224, 224);
+    font-size: .8rem;
+    margin-bottom: -1px;
+    color: grey;
+    background-color: #c7c7c7;
+}
+
+.record-compare-tab {
+    width: 33.33333%;
+    border-left: 1px solid rgb(224, 224, 224);
+    border-right: 1px solid rgb(224, 224, 224);
+    color: grey;
+    background-color: #c7c7c7;
+    font-size: .8rem;
+    text-align: center;
+    margin-bottom: -1px;
+    text-transform: uppercase;
+}
+
+.stats-tab {
+    border-top-left-radius: 5px;
+    border-left: 1px solid rgb(224, 224, 224);
+
+}
+
+.record-tab {
+    border-top-right-radius: 5px;
+    border-left: 1px solid rgb(224, 224, 224);
+    border-right: 1px solid rgb(224, 224, 224);
+}
+
+.record-tab:hover, .stats-tab:hover, .record-compare-tab:hover {
+    cursor: default;
+}
+
+.record-tab:not(.active):hover, .stats-tab:not(.active):hover, .record-compare-tab:not(.active):hover {
+    color: white;
+    cursor: pointer;
+}
+
+.active {
+    background-color: white;
+    color: black;
+}
+
 
 .fighter-hdr {
     font-size: 1.2em;
-    color: blue;
-    text-decoration: underline;
+    color: steelblue;
+}
+
+.win-record {
+    background-color: #99fc99;
+}
+
+.loss-record {
+    background-color: #ffd0d0;
 }
 
 
 @media only screen and (min-width: 768px) {
-    .matchup-left-col {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-grow: 1;
-        padding: 0 30px 0 30px;
-        font-size: .8rem;
-        width: 20%;
-    }
+
 }
 
 
