@@ -3,14 +3,22 @@
 
 $dark-blue: #34495E;
 $yellow-heading: #dd5;
+$breakpoint: 768px;
 
 body {
-    padding: 0 2em;
+    margin: 0;
+    padding: 0 .6em;
     font-family: Montserrat, sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     color: #444;
     background: #eee;
+}
+
+body {
+    @media (min-width: $breakpoint) {
+        padding: 0 2em;
+    }
 }
 
 tr:hover {
@@ -118,35 +126,86 @@ tr:hover {
 }
 
 .events-table {
+    width: 100%;
     margin-top: 1em;
+
+    background: $dark-blue;
+    color: #fff;
+    border-radius: .3em;
+
+    th, td:before {
+        color: $yellow-heading;
+        font-weight: bold;
+    }
     th {
+        text-align: left;
         display: none;
+        padding-left: .4em;
     }
     td {
+        padding-left: .4em;
         display: block;
+        &:last-child {
+            padding-bottom: .4em;
+        }
+        &:first-child {
+            padding-top: .4em;
+        }
         &:before {
             content: attr(data-header)": ";
+            @media (min-width: $breakpoint) {
+                display: none;
+            }
+            width: 6.5em;
         }
     }
     tr {
         border-top: 1px solid #ddd;
         border-bottom: 1px solid #ddd;
     }
-}
 
-.events-table {
-    background: $dark-blue;
-    color: #fff;
-    border-radius: .3em;
-    th, td:before {
-        color: $yellow-heading;
+    th, td {
+        @extend .noselect;
+        @media (min-width: $breakpoint) {
+            display: table-cell;
+        }
     }
 }
 
-.nav-bar {
 
+.nav-bar {
+    @extend .noselect;
+    background: $dark-blue;
+    color: $yellow-heading;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    //justify-content: space-between;
+    align-items: center;
+    border-bottom-left-radius: .3em;
+    border-bottom-right-radius: .3em;
+    font-weight: bold;
+    i {
+        @extend .noselect;
+        padding-left: .4em;
+        padding-right: .4em;
+    }
+    a, a:visited, a:hover, a:active {
+        text-decoration: none;
+        color: inherit;
+    }
 }
 
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
 
 
 

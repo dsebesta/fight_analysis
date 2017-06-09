@@ -3,7 +3,6 @@ const express = require('express'),
     cors = require('cors'),
     app = express(),
     http = require('http'),
-    epilogue = require('epilogue'),
     server = http.createServer(app);
 
 const routes = require('./routes');

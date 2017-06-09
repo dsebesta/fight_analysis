@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchEventsAll} from './../actions';
+import Nav from './Nav';
 
 class Events extends Component {
 
@@ -16,13 +17,14 @@ class Events extends Component {
         return this.props.events.map((event, index) => {
             const route = '/events/ufc' + (event.event_id);
             const event_date = event.event_date.split('-');
+            const venue = event.venue.split(', ');
 
             return (
 
                 <tr onTouchTap={this.handleClick.bind(this, route)} key={index}>
                     <td data-header="Date">{event_date[1] + ' / ' + event_date[2] + ' / ' + event_date[0]}</td>
                     <td data-header="Title">{event.title}</td>
-                    <td data-header="Venue">{event.venue}</td>
+                    <td data-header="Venue">{venue[0]}</td>
                 </tr>
 
             )
@@ -40,6 +42,7 @@ class Events extends Component {
 
         return (
             <div>
+                <Nav />
                 <div className="events-container">
                     <table className="events-table">
                         <thead>

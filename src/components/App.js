@@ -33,7 +33,6 @@ class App extends Component {
                             <Switch >
                                 <Route exact path="/fight" component={Events} />
                                 <Route path="/events" component={Nav} />
-
                                 <Route exact path="/fighter/:id" component={Fighter} />
                                 <Route path="/get_started" component={GetStarted} />
                                 <Route path="/find" component={Find} />
