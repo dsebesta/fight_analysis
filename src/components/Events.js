@@ -1,29 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchEventsAll} from './../actions';
-import {Link} from 'react-router-dom';
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
-
-const tableStyle = {
-    column: {
-        textAlign: "center",
-        height: "20px"
-    },
-    columnHdr: {
-        textAlign: "center",
-        height: "25px"
-    },
-    row: {
-        height: "20px"
-    }
-};
 
 class Events extends Component {
 
@@ -38,16 +15,20 @@ class Events extends Component {
     renderEvents() {
         return this.props.events.map((event, index) => {
             const route = '/events/ufc' + (event.event_id);
+            const event_date = event.event_date.split('-');
 
             return (
-                <TableRow key={index} style={tableStyle.row} onTouchTap={this.handleClick.bind(this, route)}>
-                    <TableRowColumn style={tableStyle.column}> {event.event_date} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {event.title} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {event.venue} </TableRowColumn>
-                </TableRow>
+
+                <tr onTouchTap={this.handleClick.bind(this, route)} key={index}>
+                    <td data-header="Date">{event_date[1] + ' / ' + event_date[2] + ' / ' + event_date[0]}</td>
+                    <td data-header="Title">{event.title}</td>
+                    <td data-header="Venue">{event.venue}</td>
+                </tr>
+
             )
         });
     }
+
 
     render() {
 
@@ -58,19 +39,21 @@ class Events extends Component {
         }
 
         return (
-            <div className="events-container">
-                <Table>
-                    <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                        <TableRow style={tableStyle.row}>
-                            <TableHeaderColumn style={tableStyle.columnHdr}>Date</TableHeaderColumn>
-                            <TableHeaderColumn style={tableStyle.columnHdr}>Title</TableHeaderColumn>
-                            <TableHeaderColumn style={tableStyle.columnHdr}>Location</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody displayRowCheckbox={false} showRowHover={true}>
+            <div>
+                <div className="events-container">
+                    <table className="events-table">
+                        <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Title</th>
+                            <th>Location</th>
+                        </tr>
+                        </thead>
+                        <tbody>
                         {this.renderEvents()}
-                    </TableBody>
-                </Table>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         )
     }

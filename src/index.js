@@ -2,8 +2,7 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import App from './components/App';
 
-require('./css/index.css');
-// require('./css/bootstrap.min.css');
+require('./css/index.scss');
 
 ReactDom.render(
     <App />,
