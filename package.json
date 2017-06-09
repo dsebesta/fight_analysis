@@ -17,7 +17,10 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.1",
+    "request": "^2.81.0"
+  },
   "devDependencies": {
     "axios": "^0.16.1",
     "babel-core": "^6.24.1",
