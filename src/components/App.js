@@ -11,12 +11,7 @@ injectTapEventPlugin();
 
  //Components
 import Events from './Events';
-import GetStarted from './GetStarted';
-import Find from './Find';
 
-import Login from './Login';
-import Admin from './Admin';
-import Fighter from './Fighter';
 
 class App extends Component {
 
@@ -33,11 +28,6 @@ class App extends Component {
                             <Switch >
                                 <Route exact path="/fight" component={Events} />
                                 <Route path="/events" component={Nav} />
-                                <Route exact path="/fighter/:id" component={Fighter} />
-                                <Route path="/get_started" component={GetStarted} />
-                                <Route path="/find" component={Find} />
-                                <Route path="/login" component={Login} />
-                                <Route path="/admin" component={Admin} />
                                 <Route render={() => {
                                     return <p>Not Found</p>
                                     }}

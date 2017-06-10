@@ -28,52 +28,31 @@ const GeneralStats = (props) => {
     props.fighter_1.ip = 'In Progress';
 
     return (
-        <Table>
-            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                <TableRow style={tableStyle.row}>
-                    <TableHeaderColumn style={tableStyle.column} colSpan="3"></TableHeaderColumn>
-                    <TableHeaderColumn style={tableStyle.column} colSpan="2"><span className="fighter-hdr">{props.fighter_0.fighter_name}</span></TableHeaderColumn>
-                    <TableHeaderColumn style={tableStyle.column} colSpan="2"><span className="fighter-hdr">{props.fighter_1.fighter_name}</span></TableHeaderColumn>
-                </TableRow>
-            </TableHeader>
-            <TableBody displayRowCheckbox={false} showRowHover={true}>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr} colSpan="3">Height</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_0.height}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_1.height}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr} colSpan="3">Reach</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_0.ip}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_1.ip}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr} colSpan="3">Leg Reach</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_0.ip}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_1.ip}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr} colSpan="3">Win</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_0.wins}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_1.wins}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr} colSpan="3">Loss</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_0.losses}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_1.losses}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr} colSpan="3">Draw</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_0.draw}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_1.draw}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr} colSpan="3">No Contest</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_0.no_contest}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column} colSpan="2">{props.fighter_1.no_contest}</TableRowColumn>
-                </TableRow>
-            </TableBody>
-        </Table>
+        <div className="matchup-stats-container">
+            <div className="matchup-stats-table">
+                <span>Height</span>
+                <div>{props.fighter_0.height}</div>
+                <div>{props.fighter_1.height}</div>
+                <span>Reach</span>
+                <div>{props.fighter_0.ip}</div>
+                <div>{props.fighter_1.ip}</div>
+                <span>Leg Reach</span>
+                <div>{props.fighter_0.ip}</div>
+                <div>{props.fighter_1.ip}</div>
+                <span>Win</span>
+                <div>{props.fighter_0.wins}</div>
+                <div>{props.fighter_1.wins}</div>
+                <span>Loss</span>
+                <div>{props.fighter_0.losses}</div>
+                <div>{props.fighter_1.losses}</div>
+                <span>Draw</span>
+                <div>{props.fighter_0.draw}</div>
+                <div>{props.fighter_1.draw}</div>
+                <span>No Contest</span>
+                <div>{props.fighter_0.no_contest}</div>
+                <div>{props.fighter_1.no_contest}</div>
+            </div>
+        </div>
     )
 };
 

@@ -6,6 +6,7 @@ import MindStats from './MindStats';
 import BodyStats from './BodyStats';
 import ComparisonStats from './ComparisonStats';
 import Record from './Record';
+import {Link} from 'react-router-dom';
 
 
 class Matchup extends Component {
@@ -19,6 +20,7 @@ class Matchup extends Component {
         this.state = {
             activeTab: true
         }
+
     }
 
     componentWillMount() {
@@ -58,6 +60,35 @@ class Matchup extends Component {
         })
     }
 
+    componentDidMount() {
+        window.addEventListener('scroll', this.debounce(this.handleScroll));
+    }
+
+    debounce(func, wait = 10, immediate = true) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+
+    handleScroll() {
+        if (window.scrollY > 150) {
+            const header = document.querySelector(".matchup-header");
+            header.classList.add("fixed-header");
+        }
+        else {
+            const header = document.querySelector(".matchup-header");
+            header.classList.remove("fixed-header");
+        }
+    }
 
     render() {
 
@@ -74,23 +105,23 @@ class Matchup extends Component {
 
         if (activeTab) {
             return (
-               <div>
+                <div>
                    {this.renderNavbar()}
                    <div className="matchup-container">
-                       <div className="matchup-right-col">
-                           <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       <div className="matchup-header">
+
+                               <div>{fighter_0.fighter_name}</div>
+
+
+                               <div>{fighter_1.fighter_name}</div>
+
                        </div>
-                       <div className="matchup-right-col">
-                           <MindStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                       </div>
-                       <div className="matchup-right-col">
-                           <BodyStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                       </div>
-                       <div className="matchup-right-col">
-                           <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                       </div>
+                       <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       <MindStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       <BodyStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
                    </div>
-               </div>
+                </div>
            )
         }
         else {
