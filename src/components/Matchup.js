@@ -6,6 +6,7 @@ import MindStats from './MindStats';
 import BodyStats from './BodyStats';
 import ComparisonStats from './ComparisonStats';
 import Record from './Record';
+import {Link} from 'react-router-dom';
 
 
 class Matchup extends Component {
@@ -19,6 +20,7 @@ class Matchup extends Component {
         this.state = {
             activeTab: true
         }
+
     }
 
     componentWillMount() {
@@ -58,7 +60,6 @@ class Matchup extends Component {
         })
     }
 
-
     render() {
 
         if (!this.props.fighter) {
@@ -74,7 +75,7 @@ class Matchup extends Component {
 
         if (activeTab) {
             return (
-               <div>
+                <div>
                    {this.renderNavbar()}
                    <div className="matchup-container">
                        <div className="matchup-right-col">
@@ -90,7 +91,7 @@ class Matchup extends Component {
                            <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
                        </div>
                    </div>
-               </div>
+                </div>
            )
         }
         else {

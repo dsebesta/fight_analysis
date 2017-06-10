@@ -147,6 +147,12 @@ tr:hover {
         display: block;
         &:last-child {
             padding-bottom: .4em;
+            border-bottom: 1px solid #ddd;
+        }
+        &:last-child {
+            @media (min-width: $breakpoint) {
+                border-bottom: none;
+            }
         }
         &:first-child {
             padding-top: .4em;
@@ -156,12 +162,7 @@ tr:hover {
             @media (min-width: $breakpoint) {
                 display: none;
             }
-            width: 6.5em;
         }
-    }
-    tr {
-        border-top: 1px solid #ddd;
-        border-bottom: 1px solid #ddd;
     }
 
     th, td {
@@ -180,7 +181,6 @@ tr:hover {
     width: 100%;
     height: 70px;
     display: flex;
-    //justify-content: space-between;
     align-items: center;
     border-bottom-left-radius: .3em;
     border-bottom-right-radius: .3em;
@@ -190,10 +190,28 @@ tr:hover {
         padding-left: .4em;
         padding-right: .4em;
     }
-    a, a:visited, a:hover, a:active {
-        text-decoration: none;
-        color: inherit;
+
+}
+
+a, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.event-header {
+    h3 {
+        text-align: center;
     }
+}
+
+.event-table {
+    @extend .noselect;
+    background-color: $dark-blue;
+    color: #fff;
+    border-radius: .3em;
+    width: 100%;
+
+
 }
 
 

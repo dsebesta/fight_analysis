@@ -19,15 +19,20 @@ class Events extends Component {
             const event_date = event.event_date.split('-');
             const venue = event.venue.split(', ');
 
-            return (
+            if (event.event_fighters[0]) {
+                return (
+                    <tr onTouchTap={this.handleClick.bind(this, route)} key={index}>
+                        <td data-header="Date">{event_date[1] + ' / ' + event_date[2] + ' / ' + event_date[0]}</td>
+                        <td data-header="Title">{event.title}</td>
+                        <td data-header="Venue">{venue[0]}</td>
+                    </tr>
+                )
+            }
+            else {
+                return null;
+            }
 
-                <tr onTouchTap={this.handleClick.bind(this, route)} key={index}>
-                    <td data-header="Date">{event_date[1] + ' / ' + event_date[2] + ' / ' + event_date[0]}</td>
-                    <td data-header="Title">{event.title}</td>
-                    <td data-header="Venue">{venue[0]}</td>
-                </tr>
 
-            )
         });
     }
 

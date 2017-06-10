@@ -5,7 +5,7 @@ import {Route, Switch} from 'react-router-dom';
 
 
 import Matchup from './Matchup';
-import Event from './Event';
+import EventHeader from './EventHeader';
 
 
 const Nav = () => {
@@ -17,8 +17,7 @@ const Nav = () => {
             </div>
 
             <Switch >
-                <Route exact path="/events/:id" component={Event} />
-                <Route exact path="/events/:id/:match" component={Matchup} />
+                <Route path="/events/:id" component={EventHeader} />
             </Switch>
         </div>
 
