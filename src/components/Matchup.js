@@ -78,18 +78,18 @@ class Matchup extends Component {
                 <div>
                    {this.renderNavbar()}
                    <div className="matchup-container">
-                       <div className="matchup-right-col">
-                           <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       <div className="matchup-header">
+
+                               <div>{fighter_0.fighter_name}</div>
+
+
+                               <div>{fighter_1.fighter_name}</div>
+
                        </div>
-                       <div className="matchup-right-col">
-                           <MindStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                       </div>
-                       <div className="matchup-right-col">
-                           <BodyStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                       </div>
-                       <div className="matchup-right-col">
-                           <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
-                       </div>
+                       <GeneralStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       <MindStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       <BodyStats fighter_0={fighter_0} fighter_1={fighter_1} />
+                       <ComparisonStats fighter_0={fighter_0} fighter_1={fighter_1} />
                    </div>
                 </div>
            )

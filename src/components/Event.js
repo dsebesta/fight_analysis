@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import {fetchEvent} from './../actions';
-import {Link} from 'react-router-dom';
 
 class Events extends Component {
 

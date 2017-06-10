@@ -11,7 +11,7 @@ class EventHeader extends Component {
     componentWillMount() {
         const path = document.location.href;
         const pathIndex = path.indexOf('ufc');
-        this.props.fetchEvent(path.substring(pathIndex+3));
+        this.props.fetchEvent(path.substring(pathIndex+3, pathIndex+8));
     }
 
     handleTitleClick() {

@@ -1,9 +1,10 @@
 
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
 
-$dark-blue: #34495E;
-$yellow-heading: #dd5;
+$background-color: #34495E;
+$heading-color: #dd5;
 $breakpoint: 768px;
+$content-color: #fff;
 
 body {
     margin: 0;
@@ -19,6 +20,21 @@ body {
     @media (min-width: $breakpoint) {
         padding: 0 2em;
     }
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+a, a:visited, a:hover, a:active {
+    text-decoration: none;
+    color: inherit;
 }
 
 tr:hover {
@@ -54,10 +70,7 @@ tr:hover {
     box-sizing: border-box;
 }
 
-.matchup-navbar {
-    display: flex;
-    margin-top: 30px;
-}
+
 
 .matchup-record-compare-navbar {
     display: flex;
@@ -67,7 +80,7 @@ tr:hover {
     width: 50%;
     text-align: center;
     border-top: 1px solid rgb(224, 224, 224);
-    font-size: .8rem;
+    font-size: .9rem;
     margin-bottom: -1px;
     color: grey;
     background-color: #c7c7c7;
@@ -107,8 +120,8 @@ tr:hover {
 }
 
 .active {
-    background-color: white;
-    color: black;
+    background-color: $background-color;
+    color: white;
 }
 
 
@@ -129,12 +142,12 @@ tr:hover {
     width: 100%;
     margin-top: 1em;
 
-    background: $dark-blue;
-    color: #fff;
+    background: $background-color;
+    color: $content-color;
     border-radius: .3em;
 
     th, td:before {
-        color: $yellow-heading;
+        color: $heading-color;
         font-weight: bold;
     }
     th {
@@ -176,8 +189,8 @@ tr:hover {
 
 .nav-bar {
     @extend .noselect;
-    background: $dark-blue;
-    color: $yellow-heading;
+    background: $background-color;
+    color: $heading-color;
     width: 100%;
     height: 70px;
     display: flex;
@@ -193,10 +206,6 @@ tr:hover {
 
 }
 
-a, a:visited, a:hover, a:active {
-    text-decoration: none;
-    color: inherit;
-}
 
 .event-header {
     h3 {
@@ -205,25 +214,70 @@ a, a:visited, a:hover, a:active {
 }
 
 .event-table {
+    border-collapse: collapse;
     @extend .noselect;
-    background-color: $dark-blue;
-    color: #fff;
+    background-color: $background-color;
+    color: $content-color;
     border-radius: .3em;
     width: 100%;
+    td {
+        text-align: center;
+        padding: 1em 0;
+        border-bottom: 1px solid gray;
+    }
+}
 
+.matchup-stats-container {
+    width: 100%;
+    margin-bottom: 10px;
+}
 
+.matchup-stats-table {
+    background-color: $background-color;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    font-size: 1rem;
+    color: $content-color;
+    div {
+        width: 50%;
+        box-sizing: border-box;
+        text-align: center;
+        border-bottom: 1px solid gray;
+        padding-bottom: .5em;
+    }
+    span {
+        color: $heading-color;
+        margin-top: 1em;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.matchup-header {
+    display: flex;
+    font-size: 1rem;
+    width: 100%;
+    background-color: $background-color;
+    div {
+        width: 50%;
+        text-align: center;
+        font-weight: bold;
+        color: $content-color;
+        border-bottom: 1px solid gray;
+        padding: .7em 0;
+
+    }
 }
 
 
-.noselect {
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome and Opera */
+.matchup-navbar {
+    display: flex;
+    margin-top: 20px;
 }
+
+
+
 
 
 

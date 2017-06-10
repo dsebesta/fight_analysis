@@ -26,40 +26,28 @@ const ComparisonStats = (props) => {
     props.fighter_1.ip = 'In Progress';
 
     return (
-        <Table>
-            <TableBody displayRowCheckbox={false} showRowHover={true}>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>at Similar Elevation</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>vs Similar Height Opponents</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>vs Similar Reach Opponents</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>vs Same Opponents</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>Typically Wins By</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
-                </TableRow>
-                <TableRow style={tableStyle.row}>
-                    <TableRowColumn style={tableStyle.columnHdr}>Typically Loses By</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_0.ip}</TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}>{props.fighter_1.ip}</TableRowColumn>
-                </TableRow>
-            </TableBody>
-        </Table>
+        <div className="matchup-stats-container">
+            <div className="matchup-stats-table">
+                <span>at Similar Elevation</span>
+                <div>{props.fighter_0.ip}</div>
+                <div>{props.fighter_1.ip}</div>
+                <span>vs Similar Height Opponents</span>
+                <div>{props.fighter_0.ip}</div>
+                <div>{props.fighter_1.ip}</div>
+                <span>vs Similar Reach Opponents</span>
+                <div>{props.fighter_0.ip}</div>
+                <div>{props.fighter_1.ip}</div>
+                <span>vs Same Opponents</span>
+                <div>{props.fighter_0.ip}</div>
+                <div>{props.fighter_1.ip}</div>
+                <span>Typically Wins By</span>
+                <div>{props.fighter_0.ip}</div>
+                <div>{props.fighter_1.ip}</div>
+                <span>Typically Loses By</span>
+                <div>{props.fighter_0.ip}</div>
+                <div>{props.fighter_1.ip}</div>
+            </div>
+        </div>
     )
 };
 
