@@ -60,6 +60,36 @@ class Matchup extends Component {
         })
     }
 
+    componentDidMount() {
+        window.addEventListener('scroll', this.debounce(this.handleScroll));
+    }
+
+    debounce(func, wait = 10, immediate = true) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
+
+    handleScroll() {
+        if (window.scrollY > 150) {
+            const header = document.querySelector(".matchup-header");
+            header.classList.add("fixed-header");
+        }
+        else {
+            const header = document.querySelector(".matchup-header");
+            header.classList.remove("fixed-header");
+        }
+    }
+
     render() {
 
         if (!this.props.fighter) {

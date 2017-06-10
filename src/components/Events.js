@@ -3,7 +3,12 @@ import { connect } from 'react-redux';
 import {fetchEventsAll} from './../actions';
 import Nav from './Nav';
 
+
 class Events extends Component {
+
+    constructor(props) {
+        super(props)
+    }
 
     componentWillMount() {
         this.props.fetchEventsAll();
@@ -12,6 +17,7 @@ class Events extends Component {
     handleClick(route) {
         this.props.history.push(route)
     }
+
 
     renderEvents() {
         return this.props.events.map((event, index) => {
