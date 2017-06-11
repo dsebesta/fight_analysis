@@ -61,7 +61,11 @@ class Matchup extends Component {
     }
 
     componentDidMount() {
-        window.addEventListener('scroll', this.debounce(this.handleScroll));
+        window.addEventListener('scroll', this.debounce(this.handleScroll), false);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.debounce(this.handleScroll), false);
     }
 
     debounce(func, wait = 10, immediate = true) {
@@ -80,12 +84,12 @@ class Matchup extends Component {
     };
 
     handleScroll() {
-        if (window.scrollY > 150) {
-            const header = document.querySelector(".matchup-header");
+        if (window.scrollY > 180) {
+            const header = document.querySelector(".matchup-header") || document.querySelector('.matchup-record-compare-navbar');
             header.classList.add("fixed-header");
         }
         else {
-            const header = document.querySelector(".matchup-header");
+            const header = document.querySelector(".matchup-header") || document.querySelector('.matchup-record-compare-navbar');
             header.classList.remove("fixed-header");
         }
     }
@@ -109,6 +113,7 @@ class Matchup extends Component {
                    {this.renderNavbar()}
                    <div className="matchup-container">
                        <div className="matchup-header">
+                                <span></span>
 
                                <div>{fighter_0.fighter_name}</div>
 

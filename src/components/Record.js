@@ -1,27 +1,5 @@
 import React, {Component} from 'react';
 import CommonOpponents from './CommonOpponents';
-import {
-    Table,
-    TableBody,
-    TableHeader,
-    TableHeaderColumn,
-    TableRow,
-    TableRowColumn,
-} from 'material-ui/Table';
-
-const tableStyle = {
-    column: {
-        textAlign: "center",
-        height: "20px"
-    },
-    columnHdr: {
-        textAlign: "center",
-        height: "25px"
-    },
-    row: {
-        height: "20px"
-    }
-};
 
 class Record extends Component {
 
@@ -39,16 +17,17 @@ class Record extends Component {
             let resultFormat;
             if (record.result === 'win') resultFormat = 'win-record';
             if (record.result === 'loss') resultFormat = 'loss-record';
+            const event_date = record.date.split('-');
 
             return (
-                <TableRow key={index} style={tableStyle.row} className={resultFormat}>
-                    <TableRowColumn style={tableStyle.column}> {record.date} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.opponent} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.round} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.time} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.result} </TableRowColumn>
-                    <TableRowColumn style={tableStyle.column}> {record.method} </TableRowColumn>
-                </TableRow>
+                <tr key={index} className={resultFormat}>
+                    <td> {event_date[0]} </td>
+                    <td> {record.opponent} </td>
+                    <td> {record.round} </td>
+                    <td> {record.time} </td>
+                    <td> {record.result} </td>
+                    <td> {record.method} </td>
+                </tr>
             )
         })
     }
@@ -91,21 +70,21 @@ class Record extends Component {
             <div>
                 {this.renderNavbar()}
                 <div className="matchup-container">
-                    <Table>
-                        <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-                            <TableRow style={tableStyle.row}>
-                                <TableHeaderColumn style={tableStyle.columnHdr}>Date</TableHeaderColumn>
-                                <TableHeaderColumn style={tableStyle.columnHdr}>Opponent</TableHeaderColumn>
-                                <TableHeaderColumn style={tableStyle.columnHdr}>Round</TableHeaderColumn>
-                                <TableHeaderColumn style={tableStyle.columnHdr}>Time</TableHeaderColumn>
-                                <TableHeaderColumn style={tableStyle.columnHdr}>Result</TableHeaderColumn>
-                                <TableHeaderColumn style={tableStyle.columnHdr}>Method</TableHeaderColumn>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody displayRowCheckbox={false} showRowHover={true}>
+                    <table className="record-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Opponent</th>
+                                <th>Round</th>
+                                <th>Time</th>
+                                <th>Result</th>
+                                <th>Method</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                             {this.renderPastFights(activeTab)}
-                        </TableBody>
-                    </Table>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         )
